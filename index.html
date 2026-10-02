@@ -1,0 +1,1713 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>codER — разработка приложений под ключ</title>
+<meta name="description" content="Senior Lead Fullstack: мобильные приложения на Kotlin Multiplatform, backend, web, DevOps и поддержка — напрямую, без агентской наценки. Калькулятор стоимости проекта.">
+<meta name="theme-color" content="#0C0D0B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="codER — разработка приложений под ключ">
+<meta property="og:description" content="Senior Lead Fullstack: мобильные приложения на Kotlin Multiplatform, backend, web, DevOps и поддержка — напрямую, без агентской наценки. Калькулятор стоимости проекта.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235CE1E6'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='30' fill='%230C0D0B'%3EER%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700&amp;family=Onest:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0C0D0B}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit}
+.page{--bg:#0C0D0B;--surface:#131411;--surface2:#1A1C17;--line:rgba(237,238,232,.08);--line2:rgba(237,238,232,.16);--text:#EDEEE8;--muted:#A3A59B;--dim:#85877C;--ink:#0C0D0B;--accent:#5CE1E6;position:relative;width:100%;overflow-x:clip;background:var(--bg);color:var(--text);font-family:'Onest',system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.page ::selection{background:var(--accent);color:var(--ink)}
+.page a:focus-visible,.page button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.ic{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.accent{color:var(--accent)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(12,13,11,.74);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+.logo{display:inline-flex;align-items:center;gap:12px}
+.logo-name{display:inline-flex;align-items:center;font-family:'Tektur',sans-serif;font-weight:600;font-size:24px;letter-spacing:.01em;line-height:1}
+.logo-er{display:inline-block;margin-left:2px;padding:3px 6px 4px;border-radius:7px;background:var(--accent);color:var(--ink);font-weight:700;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.logo:hover .logo-er{transform:rotate(-8deg) scale(1.06)}
+.logo-sub{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.nav-links{display:flex;gap:30px}
+.nav-links a{font-size:15px;color:var(--muted);position:relative;transition:color .2s}
+.nav-links a::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:right;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;font-family:'Onest',sans-serif;font-weight:600;font-size:16px;white-space:nowrap;cursor:pointer;transition:transform .3s cubic-bezier(.2,.8,.2,1),background .25s,color .25s,border-color .25s,box-shadow .3s}
+.btn .ic{width:18px;height:18px;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.btn:hover .ic{transform:translateX(4px)}
+.btn-primary{background:var(--accent);color:var(--ink)}
+.btn-primary:hover{color:var(--ink);transform:translateY(-2px);box-shadow:0 14px 34px -14px var(--accent)}
+.btn-ghost{border:1px solid var(--line2);color:var(--text)}
+.btn-ghost:hover{border-color:var(--text);color:var(--text)}
+.btn-sm{height:44px;padding:0 20px;font-size:14px}
+.btn-block{width:100%}
+
+/* hero */
+.hero{position:relative;padding:88px 0 84px}
+.hero-grid-bg{position:absolute;inset:-72px 0 0 0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:radial-gradient(ellipse 60% 70% at 72% 40%,#000 18%,transparent 72%);mask-image:radial-gradient(ellipse 60% 70% at 72% 40%,#000 18%,transparent 72%);pointer-events:none;animation:gridDrift 26s linear infinite}
+@keyframes gridDrift{
+to{background-position:72px 72px}
+}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:40px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 12px;border:1px solid var(--line2);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);background:rgba(19,20,17,.7)}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2.2s ease-out infinite}
+@keyframes pulse{
+0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}
+100%{box-shadow:0 0 0 12px transparent}
+}
+.hero-title{font-family:'Tektur',sans-serif;font-weight:600;font-size:clamp(42px,5.8vw,86px);line-height:1;letter-spacing:-.025em;margin:28px 0 0}
+.w{display:inline-block;overflow:hidden;vertical-align:top;margin-right:.24em;padding-bottom:.12em;margin-bottom:-.12em}
+.w>span{display:inline-block;animation:rise 1.1s cubic-bezier(.16,1,.3,1) both}
+@keyframes rise{
+from{translate:0 110%}
+to{translate:0 0}
+}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.htag{font-family:'JetBrains Mono',monospace;font-size:13px;padding:7px 12px;border-radius:8px;border:1px solid var(--line2);color:var(--text);background:var(--surface)}
+.htag.hot{border-color:var(--accent);color:var(--accent)}
+.htag.opt{border-style:dashed;color:var(--muted);background:transparent}
+.hero-lead{font-size:19px;color:var(--muted);max-width:540px;margin:24px 0 0}
+.hero-lead b{color:var(--text);font-weight:500}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.hero-note{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;color:var(--muted)}
+.hero-note .ic{color:var(--accent);width:18px;height:18px}
+.fade{animation:fadeUp .9s cubic-bezier(.16,1,.3,1) both}
+@keyframes fadeUp{
+from{opacity:0;translate:0 24px}
+to{opacity:1;translate:0 0}
+}
+
+/* hero stage */
+.stage{position:relative;width:580px;height:580px;margin-left:auto}
+.st{position:absolute;animation:pop 1.1s cubic-bezier(.16,1,.3,1) both}
+@keyframes pop{
+from{opacity:0;translate:0 40px;scale:.96}
+to{opacity:1;translate:0 0;scale:1}
+}
+.float{animation:float 7s ease-in-out infinite}
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-14px)}
+}
+.st-admin{top:0;right:0;width:400px;z-index:1}
+.st-phone{left:10px;top:40px;width:250px;z-index:2}
+.st-code{right:-10px;bottom:0;width:370px;z-index:3}
+.st-tag{z-index:4}
+.win{background:var(--surface);border:1px solid var(--line2);border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.75)}
+.win-bar{display:flex;align-items:center;gap:6px;height:38px;padding:0 14px;border-bottom:1px solid var(--line)}
+.win-bar i{width:9px;height:9px;border-radius:50%;background:var(--line2)}
+.win-title{margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim)}
+.adm{display:grid;grid-template-columns:52px minmax(0,1fr);min-height:230px}
+.adm-side{border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:12px}
+.adm-side b{display:block;height:8px;border-radius:4px;background:var(--line2)}
+.adm-side b.on{background:var(--accent)}
+.adm-main{padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.adm-head{display:flex;justify-content:space-between;align-items:center}
+.adm-h{font-size:13px;font-weight:600}
+.adm-chip{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:6px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}
+.bars{display:flex;align-items:flex-end;gap:7px;height:70px;padding-bottom:2px;border-bottom:1px solid var(--line)}
+.bars i{flex:1;border-radius:4px 4px 0 0;background:var(--line2);transform-origin:bottom;animation:bar 4s ease-in-out infinite}
+.bars i.hi{background:var(--accent)}
+@keyframes bar{
+0%,100%{transform:scaleY(.55)}
+50%{transform:scaleY(1)}
+}
+.adm-row{display:flex;align-items:center;gap:10px}
+.av{width:20px;height:20px;border-radius:50%;background:var(--surface2);border:1px solid var(--line2);flex-shrink:0;display:block}
+.sk{height:7px;border-radius:4px;background:var(--line2);display:block}
+.ok{margin-left:auto;font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);padding:2px 7px;border:1px solid var(--line2);border-radius:6px}
+.w40{width:40%}.w45{width:45%}.w55{width:55%}.w60{width:60%}.w70{width:70%}.w80{width:80%}
+.phone{background:#070806;border:1px solid var(--line2);border-radius:42px;padding:10px;box-shadow:0 50px 90px -30px rgba(0,0,0,.85)}
+.ph-screen{position:relative;border-radius:33px;background:var(--surface);padding:36px 18px 18px;height:490px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.ph-notch{position:absolute;top:10px;left:50%;width:74px;height:20px;margin-left:-37px;border-radius:12px;background:#070806}
+.ph-top{display:flex;justify-content:space-between;align-items:center}
+.ph-small{font-size:12px;color:var(--muted)}
+.ph-av{width:26px;height:26px;border-radius:50%;background:var(--accent)}
+.ph-title{font-family:'Tektur',sans-serif;font-size:20px;font-weight:600;margin-top:-6px}
+.ring{position:relative;width:132px;height:132px;margin:2px auto 0}
+.ring svg{width:132px;height:132px;transform:rotate(-90deg);display:block}
+.ring circle{fill:none;stroke-width:10}
+.ring-bg{stroke:var(--line2)}
+.ring-fg{stroke:var(--accent);stroke-linecap:round;stroke-dasharray:314;stroke-dashoffset:88;animation:ring 2.4s 1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes ring{
+from{stroke-dashoffset:314}
+to{stroke-dashoffset:88}
+}
+.ring-val{position:absolute;inset:0;display:grid;place-items:center;font-family:'Tektur',sans-serif;font-size:30px;font-weight:600}
+.ring-val small{font-size:14px;color:var(--muted)}
+.ph-list{display:flex;flex-direction:column;gap:8px}
+.ph-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:var(--surface2);font-size:13px}
+.ph-item .m{margin-left:auto;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px}
+.chk{width:16px;height:16px;border-radius:5px;border:1.5px solid var(--line2);flex-shrink:0;display:grid;place-items:center}
+.ph-item.done .chk{background:var(--accent);border-color:var(--accent)}
+.ph-item.done .chk::after{content:'';width:6px;height:3px;border-left:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:rotate(-45deg) translate(1px,-1px)}
+.ph-btn{margin-top:auto;height:44px;border-radius:14px;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-weight:600;font-size:14px}
+.code{background:#0A0B09;border:1px solid var(--line2);border-radius:16px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.85)}
+.code-bar{display:flex;justify-content:space-between;align-items:center;height:36px;padding:0 14px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px}
+.code-file{color:var(--text)}
+.code-src{color:var(--accent)}
+.code-body{padding:14px 16px 16px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.75;color:#C9CBC2}
+.ln{white-space:pre;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) both}
+.ln:nth-child(1){animation-delay:1s}.ln:nth-child(2){animation-delay:1.08s}.ln:nth-child(3){animation-delay:1.16s}.ln:nth-child(4){animation-delay:1.24s}.ln:nth-child(5){animation-delay:1.32s}.ln:nth-child(6){animation-delay:1.4s}.ln:nth-child(7){animation-delay:1.48s}.ln:nth-child(8){animation-delay:1.56s}.ln:nth-child(9){animation-delay:1.64s}
+.i1{padding-left:2ch}.i2{padding-left:4ch}.i3{padding-left:6ch}
+.c-kw{color:#FF9E64}.c-ty{color:#C3B1FF}.c-fn{color:var(--accent)}.c-cm{color:#7C7E74}
+.caret{display:inline-block;width:7px;height:15px;background:var(--accent);vertical-align:-3px;margin-left:3px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{
+50%{opacity:0}
+}
+.ftag{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:rgba(19,20,17,.88);border:1px solid var(--line2);font-family:'JetBrains Mono',monospace;font-size:12px;white-space:nowrap;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.ftag i{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:24px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq-track{display:flex;width:max-content;animation:marq 52s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+.mq-group{display:flex;align-items:center;gap:48px;padding-right:48px}
+.mq-item{font-family:'Tektur',sans-serif;font-size:30px;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .3s}
+.mq-item:hover{color:var(--text)}
+.mq-sep{width:10px;height:10px;background:var(--accent);transform:rotate(45deg);flex-shrink:0}
+@keyframes marq{
+to{transform:translateX(-50%)}
+}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.stat{padding:44px 32px 40px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat-num{font-family:'Tektur',sans-serif;font-size:66px;font-weight:600;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.stat-num em{font-style:normal;color:var(--accent)}
+.stat-label{margin-top:14px;color:var(--muted);font-size:15px;max-width:260px}
+.stats-sec{border-bottom:1px solid var(--line)}
+
+/* section scaffolding */
+.section{position:relative;padding:120px 0}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:end;margin-bottom:64px}
+.sec-head .lead{justify-self:end}
+.kicker{display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.kicker::before{content:'';width:28px;height:1px;background:var(--accent)}
+.h2{font-family:'Tektur',sans-serif;font-weight:600;font-size:clamp(32px,3.9vw,58px);line-height:1.04;letter-spacing:-.02em;margin:20px 0 0}
+.lead{color:var(--muted);font-size:19px;max-width:540px;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 11px;border-radius:8px;border:1px solid var(--line2);color:var(--text)}
+.chips span.opt{border-style:dashed}
+
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.svc{position:relative;display:flex;flex-direction:column;gap:14px;padding:32px;min-height:330px;background:var(--surface);border:1px solid var(--line);border-radius:26px;overflow:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .3s,background .3s}
+.svc:hover{transform:translateY(-6px);border-color:var(--line2);background:var(--surface2)}
+.svc-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:auto;padding-bottom:28px}
+.svc-idx{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)}
+.svc-badge{font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 11px;border-radius:999px;background:var(--ink);color:var(--accent)}
+.svc-badge.alt{background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.svc h3{font-family:'Tektur',sans-serif;font-weight:600;font-size:25px;letter-spacing:-.01em;margin:0;line-height:1.12}
+.svc p{margin:0;color:var(--muted);font-size:16px}
+.svc-price{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:10px;padding-top:22px;border-top:1px solid var(--line)}
+.price{font-family:'Tektur',sans-serif;font-size:24px;font-weight:600;white-space:nowrap}
+.price small{font-family:'Onest',sans-serif;font-size:14px;color:var(--muted);font-weight:400;margin-right:6px}
+.price small.per{margin:0 0 0 4px}
+.price.soft{font-family:'Onest',sans-serif;font-size:17px;font-weight:500;white-space:normal}
+.svc-arrow{width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;flex-shrink:0;transition:all .35s cubic-bezier(.2,.8,.2,1)}
+.svc-arrow .ic{width:18px;height:18px}
+.svc:hover .svc-arrow{background:var(--accent);border-color:var(--accent);color:var(--ink);transform:rotate(45deg)}
+.span2{grid-column:span 2}
+.span3{grid-column:1/-1}
+.svc.featured{background:var(--accent);color:var(--ink);border-color:var(--accent);min-height:380px}
+.svc.featured h3{font-size:clamp(32px,3.4vw,50px);line-height:1;letter-spacing:-.02em}
+.svc.featured p,.svc.featured .svc-idx,.svc.featured .price small{color:rgba(12,13,11,.72)}
+.svc.featured .chips span{border-color:rgba(12,13,11,.25);color:var(--ink)}
+.svc.featured .svc-price{border-color:rgba(12,13,11,.18)}
+.svc.featured .svc-arrow{border-color:rgba(12,13,11,.3)}
+.svc.featured:hover{background:var(--accent);border-color:var(--accent)}
+.svc.featured:hover .svc-arrow{background:var(--ink);color:var(--accent);border-color:var(--ink)}
+.svc.hl{border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.svc.hl:hover{border-color:var(--accent)}
+.svc.hl h3{font-size:clamp(28px,2.8vw,40px);line-height:1.02}
+.svc.wide{flex-direction:row;align-items:center;gap:48px;min-height:0;padding:32px 40px;border-style:dashed;border-color:var(--line2)}
+.svc.wide .svc-top{margin:0;padding:0;flex-direction:column;align-items:flex-start;gap:12px}
+.svc.wide .svc-body{flex:1;display:flex;flex-direction:column;gap:8px}
+.svc.wide .svc-price{margin:0;padding:0;border:0;flex-shrink:0;gap:24px}
+.opt-badge{font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border-radius:999px;border:1px dashed var(--line2);color:var(--muted)}
+
+/* model */
+.cmp{border:1px solid var(--line);border-radius:26px;overflow:hidden}
+.cmp-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.cmp-row:first-child{border-top:0}
+.cmp-old,.cmp-new{display:flex;align-items:center;gap:16px;padding:24px 32px;font-size:18px}
+.cmp-old{color:var(--muted)}
+.cmp-new{background:var(--surface);color:var(--text);font-weight:500;border-left:1px solid var(--line);transition:background .3s}
+.cmp-row:hover .cmp-new{background:var(--surface2)}
+.ico-c{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line2);flex-shrink:0}
+.ico-c .ic{width:15px;height:15px}
+.cmp-new .ico-c{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.cmp-head .cmp-old,.cmp-head .cmp-new{font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.06em;padding:18px 32px;font-weight:400}
+.cmp-head .cmp-new{color:var(--accent)}
+
+/* devops */
+.ops{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.ops-vis{border:1px solid var(--line2);border-radius:28px;background:var(--surface);overflow:hidden;display:flex;flex-direction:column}
+.ops-bar{display:flex;justify-content:space-between;align-items:center;height:54px;padding:0 24px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+.ops-status{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);padding:5px 12px;border-radius:999px;background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.ops-status i{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.2s ease-out infinite}
+.ops-body{padding:28px 24px 24px;display:flex;flex-direction:column;gap:22px;flex:1}
+.stages{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.stg-track{position:absolute;left:0;right:0;top:15px;height:2px;background:var(--line2)}
+.stg-track i{position:absolute;inset:0;background:var(--accent);transform-origin:left;transform:scaleX(.917);animation:trackFill 9s linear infinite}
+@keyframes trackFill{
+0%,5%{transform:scaleX(.083)}
+65%,92%{transform:scaleX(.917)}
+93%,100%{transform:scaleX(.083)}
+}
+.stg{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px}
+.stg i{width:32px;height:32px;border-radius:50%;border:1.5px solid currentColor;background:var(--surface);display:grid;place-items:center}
+.stg i::after{content:'';width:10px;height:10px;border-radius:50%;background:currentColor}
+.stg span{color:var(--muted)}
+.s0{animation:k0 9s linear infinite}.s1{animation:k1 9s linear infinite}.s2{animation:k2 9s linear infinite}.s3{animation:k3 9s linear infinite}.s4{animation:k4 9s linear infinite}.s5{animation:k5 9s linear infinite}
+@keyframes k0{
+0%,4%{color:var(--dim)}
+5%,92%{color:var(--accent)}
+93%,100%{color:var(--dim)}
+}
+@keyframes k1{
+0%,16%{color:var(--dim)}
+17%,92%{color:var(--accent)}
+93%,100%{color:var(--dim)}
+}
+@keyframes k2{
+0%,28%{color:var(--dim)}
+29%,92%{color:var(--accent)}
+93%,100%{color:var(--dim)}
+}
+@keyframes k3{
+0%,40%{color:var(--dim)}
+41%,92%{color:var(--accent)}
+93%,100%{color:var(--dim)}
+}
+@keyframes k4{
+0%,52%{color:var(--dim)}
+53%,92%{color:var(--accent)}
+93%,100%{color:var(--dim)}
+}
+@keyframes k5{
+0%,64%{color:var(--dim)}
+65%,92%{color:var(--accent)}
+93%,100%{color:var(--dim)}
+}
+.term{border-radius:16px;background:#0A0B09;border:1px solid var(--line);padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.95;color:#C9CBC2}
+.tl{display:flex;align-items:center;gap:10px;white-space:nowrap;overflow:hidden}
+.tl .p{color:var(--accent);width:14px;text-align:center}
+.tl .okc{width:14px;height:14px;border-radius:4px;background:var(--accent);display:inline-grid;place-items:center;flex-shrink:0}
+.tl .okc::after{content:'';width:6px;height:3px;border-left:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:rotate(-45deg) translate(1px,-1px)}
+.tl .dim{color:var(--dim);margin-left:auto}
+.l0{animation:l0 9s linear infinite}.l1{animation:l1 9s linear infinite}.l2{animation:l2 9s linear infinite}.l3{animation:l3 9s linear infinite}.l4{animation:l4 9s linear infinite}.l5{animation:l5 9s linear infinite}
+@keyframes l0{
+0%,4%{opacity:0}
+6%,92%{opacity:1}
+95%,100%{opacity:0}
+}
+@keyframes l1{
+0%,16%{opacity:0}
+18%,92%{opacity:1}
+95%,100%{opacity:0}
+}
+@keyframes l2{
+0%,28%{opacity:0}
+30%,92%{opacity:1}
+95%,100%{opacity:0}
+}
+@keyframes l3{
+0%,40%{opacity:0}
+42%,92%{opacity:1}
+95%,100%{opacity:0}
+}
+@keyframes l4{
+0%,52%{opacity:0}
+54%,92%{opacity:1}
+95%,100%{opacity:0}
+}
+@keyframes l5{
+0%,64%{opacity:0}
+66%,92%{opacity:1}
+95%,100%{opacity:0}
+}
+.mon{border-radius:16px;border:1px solid var(--line);padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.mon-h{display:flex;justify-content:space-between;gap:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.spark{width:100%;height:auto;display:block}
+.spark .area{fill:color-mix(in srgb,var(--accent) 12%,transparent);stroke:none}
+.spark .line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:640;stroke-dashoffset:0;animation:spark 7s ease-in-out infinite}
+@keyframes spark{
+0%{stroke-dashoffset:640}
+45%,88%{stroke-dashoffset:0;opacity:1}
+100%{stroke-dashoffset:0;opacity:0}
+}
+.svcs{display:flex;flex-wrap:wrap;gap:8px}
+.svcs span{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 10px;border-radius:8px;border:1px solid var(--line2);color:var(--text)}
+.svcs i{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.ops-cards{display:flex;flex-direction:column;gap:16px}
+.ops-card{flex:1;padding:32px;border-radius:28px;border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;gap:18px}
+.ops-card.hi{border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.ops-card-h{display:flex;align-items:center;gap:14px}
+.ops-card-h .ic{width:28px;height:28px;color:var(--accent)}
+.ops-card h3{font-family:'Tektur',sans-serif;font-weight:600;font-size:25px;margin:0}
+.ops-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ops-list li{display:flex;gap:14px;align-items:baseline;font-size:16px;color:var(--muted)}
+.ops-list li::before{content:'';width:6px;height:6px;background:var(--accent);transform:translateY(-3px) rotate(45deg);flex-shrink:0}
+.ops-cta{margin-top:auto;padding-top:20px;border-top:1px solid var(--line)}
+
+/* cases */
+.cases{display:flex;flex-direction:column;gap:32px}
+.case{position:sticky;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);min-height:520px;border:1px solid var(--line2);border-radius:32px;background:var(--surface);overflow:hidden;box-shadow:0 -30px 60px -30px rgba(0,0,0,.7)}
+.case-copy{padding:48px;display:flex;flex-direction:column;gap:18px}
+.case-meta{display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)}
+.case-n{color:var(--ink);background:var(--accent);padding:3px 8px;border-radius:6px}
+.case-title{font-family:'Tektur',sans-serif;font-weight:600;font-size:clamp(30px,3vw,44px);letter-spacing:-.02em;line-height:1.02;margin:8px 0 0}
+.case-sub{font-size:19px;margin:0}
+.case-desc{color:var(--muted);margin:0;font-size:16px}
+.case-copy .chips{margin-top:auto;padding-top:12px}
+.case-vis{position:relative;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--line);background-color:var(--bg);background-image:radial-gradient(var(--line2) 1px,transparent 1px);background-size:22px 22px;overflow:hidden;padding:40px}
+.mini-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;text-align:center}
+.v1{display:flex;align-items:center}
+.mp{width:190px;height:360px;border-radius:30px;border:1px solid var(--line2);background:#070806;padding:8px}
+.mp-in{height:100%;border-radius:23px;background:var(--surface);padding:26px 14px 14px;display:flex;flex-direction:column;gap:10px}
+.mp-h{font-family:'Tektur',sans-serif;font-size:15px;font-weight:600}
+.mp-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.mp-days i{height:26px;border-radius:7px;background:var(--surface2);border:1px solid var(--line)}
+.mp-days i.on{background:var(--accent);border-color:var(--accent)}
+.mp-card{border-radius:12px;background:var(--surface2);padding:12px;display:flex;flex-direction:column;gap:7px}
+.mp-card.acc{background:color-mix(in srgb,var(--accent) 12%,var(--surface2));border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);font-size:12px;color:var(--accent);font-weight:500}
+.v1-link{width:64px;height:2px;margin-top:22px;position:relative;background-image:linear-gradient(90deg,var(--line2) 50%,transparent 50%);background-size:10px 2px}
+.v1-link i{position:absolute;top:-4px;left:0;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:travel 2.6s ease-in-out infinite}
+@keyframes travel{
+0%,100%{left:0}
+50%{left:54px}
+}
+.ma{width:260px;border-radius:18px;border:1px solid var(--line2);background:var(--surface);overflow:hidden}
+.ma-bar{height:34px;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 12px;gap:6px}
+.ma-bar i{width:8px;height:8px;border-radius:50%;background:var(--line2)}
+.ma-body{padding:14px;display:flex;flex-direction:column;gap:13px}
+.ma-row{display:grid;grid-template-columns:22px minmax(0,1fr) 70px;gap:10px;align-items:center}
+.prog{height:6px;border-radius:3px;background:var(--surface2);overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);border-radius:3px;transform-origin:left;animation:grow 3.2s cubic-bezier(.2,.8,.2,1) infinite alternate}
+@keyframes grow{
+from{transform:scaleX(.15)}
+to{transform:scaleX(1)}
+}
+.ma-foot{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 14px}
+.ma-foot span{font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;border-radius:6px;border:1px solid var(--line2);color:var(--muted)}
+.roles{position:absolute;top:28px;left:28px;display:flex;gap:6px}
+.roles span{font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border-radius:7px;border:1px solid var(--line2);color:var(--muted);background:var(--bg)}
+.roles span:first-child{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.org{width:100%;max-width:460px;display:flex;flex-direction:column;align-items:center}
+.node{display:inline-flex;align-items:center;gap:8px;padding:9px 14px 9px 9px;border-radius:12px;background:var(--surface);border:1px solid var(--line2);font-size:13px;white-space:nowrap;position:relative;z-index:1}
+.node.root{border-color:var(--accent)}
+.node.root .av{background:var(--accent);border-color:var(--accent)}
+.stem{width:1px;height:28px;background:var(--line2)}
+.stem.short{height:16px}
+.org-kids{position:relative;width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.org-kids::before{content:'';position:absolute;top:0;left:16.667%;right:16.667%;height:1px;background:var(--line2)}
+.org-cell{display:flex;flex-direction:column;align-items:center}
+.ppl{display:flex}
+.ppl i{width:24px;height:24px;border-radius:50%;background:var(--surface2);border:2px solid var(--bg);margin-left:-7px}
+.ppl i:first-child{margin-left:0}
+.ppl i.a{background:var(--accent)}
+.toast{position:absolute;right:28px;bottom:28px;display:flex;gap:12px;align-items:center;padding:12px 16px;border-radius:14px;background:var(--surface2);border:1px solid var(--line2);box-shadow:0 20px 40px -20px rgba(0,0,0,.7);animation:toast 6s ease-in-out infinite}
+.toast b{display:block;font-size:13px;font-weight:600}
+.toast small{display:block;font-size:12px;color:var(--muted)}
+.t-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0}
+@keyframes toast{
+0%,8%{opacity:0;translate:0 16px}
+16%,72%{opacity:1;translate:0 0}
+80%,100%{opacity:0;translate:0 16px}
+}
+.pipe{position:relative;display:flex;flex-direction:column;gap:12px;width:380px}
+.pipe-track{position:absolute;left:19px;top:19px;bottom:19px;width:1px;background:var(--line2)}
+.pipe-dot{position:absolute;left:-3px;top:0;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:flow 3.2s linear infinite}
+.pipe-dot.d2{animation-delay:-1.6s}
+@keyframes flow{
+0%{top:0%;opacity:0}
+10%{opacity:1}
+90%{opacity:1}
+100%{top:100%;opacity:0}
+}
+.pnode{position:relative;z-index:1;display:flex;align-items:center;gap:14px}
+.pn-i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1px solid var(--line2);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0}
+.pn-c{flex:1;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 16px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.pn-c b{font-size:14px;font-weight:600}
+.pn-c small{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.pnode.acc .pn-i{background:var(--accent);border-color:var(--accent);color:var(--ink);animation:pulse 2.2s ease-out infinite}
+.pnode.acc .pn-c{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
+
+/* experience */
+.xp-feat{position:relative;border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);border-radius:32px;background:var(--surface);padding:44px;display:flex;flex-direction:column;gap:28px;overflow:hidden}
+.xf-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.xf-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.xf-now{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;background:var(--accent);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500}
+.xf-now i{width:6px;height:6px;border-radius:50%;background:var(--ink);animation:blink 1.4s steps(1) infinite}
+.xf-links{display:flex;gap:8px;flex-wrap:wrap}
+.xf-links a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line2);font-size:14px;transition:border-color .25s,color .25s}
+.xf-links a .ic{width:16px;height:16px;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.xf-links a:hover{border-color:var(--accent);color:var(--accent)}
+.xf-links a:hover .ic{transform:translate(2px,-2px)}
+.xf-title{display:flex;align-items:baseline;gap:24px;flex-wrap:wrap}
+.xf-company{font-family:'Tektur',sans-serif;font-weight:700;font-size:clamp(48px,6vw,88px);line-height:.92;letter-spacing:-.03em;margin:0}
+.xf-role{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.xf-lead{font-size:20px;margin:-6px 0 0;max-width:780px}
+.xf-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+.xf-item{padding:24px 24px 4px 0;display:flex;flex-direction:column;gap:10px}
+.xf-item+.xf-item{padding-left:24px;border-left:1px solid var(--line)}
+.xf-n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)}
+.xf-item h4{font-family:'Tektur',sans-serif;font-weight:600;font-size:21px;line-height:1.15;margin:0}
+.xf-item p{margin:0;font-size:15px;color:var(--muted)}
+.xf-row{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;align-items:start;padding-top:20px;border-top:1px solid var(--line)}
+.xf-k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding-top:6px}
+.xp{margin-top:56px}
+.xp-head{display:flex;justify-content:space-between;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--line2);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.xp-row{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1.9fr);gap:32px;align-items:start;padding:28px 0;border-bottom:1px solid var(--line);transition:background .3s,padding .4s cubic-bezier(.2,.8,.2,1)}
+.xp-row:hover{padding-left:16px;background:var(--surface)}
+.xp-y{font-size:13px;color:var(--dim);padding-top:6px}
+.xp-co{display:flex;flex-direction:column;gap:4px}
+.xp-c{font-family:'Tektur',sans-serif;font-weight:600;font-size:25px;line-height:1.1;transition:color .3s}
+.xp-row:hover .xp-c{color:var(--accent)}
+.xp-r{font-size:14px;color:var(--muted)}
+.xp-a{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.xp-a li{display:flex;gap:14px;font-size:16px;color:var(--muted)}
+.xp-a li::before{content:'';width:12px;height:1px;background:var(--accent);margin-top:13px;flex-shrink:0}
+
+/* design */
+.design-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:64px;align-items:center}
+.design-copy .lead{margin-top:24px}
+.dlist{display:flex;flex-wrap:wrap;gap:8px;margin:32px 0 0;padding:0;list-style:none}
+.dlist li{font-size:14px;padding:9px 14px;border-radius:999px;border:1px solid var(--line2);transition:border-color .25s,color .25s}
+.dlist li:hover{border-color:var(--accent);color:var(--accent)}
+.ds{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;padding:24px;border-radius:32px;border:1px solid var(--line);background:var(--surface);height:560px}
+.ds-screen{position:relative;height:100%;border-radius:26px;border:1px solid var(--line2);background:var(--bg);overflow:hidden}
+.ds-badge{position:absolute;top:12px;left:50%;margin-left:-46px;z-index:3;width:92px;height:24px;border-radius:999px;background:var(--surface2);border:1px solid var(--line2);font-family:'JetBrains Mono',monospace;font-size:11px}
+.ds-badge span{position:absolute;inset:0;display:grid;place-items:center}
+.b-wf{opacity:0;color:var(--muted);animation:bWf 8s infinite}
+.b-ui{color:var(--accent);animation:bUi 8s infinite}
+@keyframes bWf{
+0%,44%{opacity:1}
+50%,92%{opacity:0}
+100%{opacity:1}
+}
+@keyframes bUi{
+0%,44%{opacity:0}
+50%,92%{opacity:1}
+100%{opacity:0}
+}
+.ds-layer{position:absolute;inset:0;padding:48px 16px 16px;display:flex;flex-direction:column;gap:10px}
+.wf-bar{height:14px;width:50%;border:1px dashed var(--line2);border-radius:4px}
+.wf-img{height:120px;border:1px dashed var(--line2);border-radius:12px;overflow:hidden}
+.wf-img svg{width:100%;height:100%;display:block}
+.wf-img path{fill:none;stroke:var(--line2);stroke-width:1;vector-effect:non-scaling-stroke}
+.wf-line{height:10px;border:1px dashed var(--line2);border-radius:4px}
+.wf-row{height:42px;border:1px dashed var(--line2);border-radius:10px}
+.wf-btn{margin-top:auto;height:42px;border:1px dashed var(--line2);border-radius:12px}
+.ui{background:var(--bg);animation:uiCycle 8s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes uiCycle{
+0%,38%{clip-path:inset(0 0 100% 0);opacity:1}
+50%,90%{clip-path:inset(0 0 0% 0);opacity:1}
+97%{clip-path:inset(0 0 0% 0);opacity:0}
+100%{clip-path:inset(0 0 100% 0);opacity:0}
+}
+.scan{position:absolute;left:0;right:0;top:0;height:2px;z-index:2;background:var(--accent);box-shadow:0 0 16px 2px var(--accent);opacity:0;animation:scan 8s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes scan{
+0%,37%{top:0%;opacity:0}
+38%{top:0%;opacity:1}
+50%{top:100%;opacity:1}
+52%,100%{top:100%;opacity:0}
+}
+.ui-top{display:flex;justify-content:space-between;align-items:center}
+.ui-h{font-family:'Tektur',sans-serif;font-size:16px;font-weight:600}
+.ui-dot{width:22px;height:22px;border-radius:50%;background:var(--surface2);border:1px solid var(--line2)}
+.ui-img{position:relative;height:120px;border-radius:14px;background:var(--surface2);overflow:hidden}
+.ui-sun{position:absolute;right:22px;top:18px;width:34px;height:34px;border-radius:50%;background:var(--accent)}
+.ui-hill{position:absolute;left:-20%;right:-20%;bottom:-60px;height:110px;border-radius:50%;background:#272A22}
+.ui-t{font-weight:600;font-size:14px;margin-top:2px}
+.ui-s{font-size:12px;color:var(--muted);margin-top:-6px}
+.ui-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--surface);font-size:13px}
+.ui-row b{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 7px;border-radius:6px;background:var(--accent);color:var(--ink);font-weight:500}
+.ui-btn{margin-top:auto;height:42px;border-radius:12px;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-size:13px;font-weight:600}
+.ds-tokens{display:flex;flex-direction:column;gap:12px;padding:8px 4px;min-width:0}
+.tok-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+.swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.sw i{display:block;height:58px;border-radius:12px;border:1px solid var(--line2)}
+.sw span{display:block;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.sw-a{background:var(--accent)}.sw-t{background:#EDEEE8}.sw-s{background:#1A1C17}.sw-m{background:#85877C}
+.type-spec{display:flex;align-items:center;gap:16px;padding:14px;border-radius:14px;border:1px solid var(--line)}
+.aa{font-family:'Tektur',sans-serif;font-weight:700;font-size:56px;line-height:1;letter-spacing:-.03em}
+.ts-1{font-family:'Tektur',sans-serif;font-size:16px;font-weight:600}
+.ts-2{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:4px}
+.comp{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.c-btn{height:38px;padding:0 16px;border-radius:999px;background:var(--accent);color:var(--ink);display:inline-flex;align-items:center;font-size:13px;font-weight:600}
+.c-btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--text)}
+.toggle{position:relative;width:46px;height:26px;border-radius:999px;background:var(--surface2);border:1px solid var(--line2);animation:tgBg 3s ease-in-out infinite;flex-shrink:0}
+.toggle i{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--text);animation:tgKnob 3s ease-in-out infinite}
+@keyframes tgKnob{
+0%,40%{translate:0 0}
+50%,90%{translate:20px 0;background:var(--ink)}
+100%{translate:0 0}
+}
+@keyframes tgBg{
+0%,40%{background:var(--surface2)}
+50%,90%{background:var(--accent)}
+100%{background:var(--surface2)}
+}
+.c-check{width:24px;height:24px;border-radius:7px;background:var(--accent);display:grid;place-items:center;flex-shrink:0}
+.c-check::after{content:'';width:9px;height:5px;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(-45deg) translate(1px,-1px)}
+.c-input{flex:1;min-width:120px;height:38px;border-radius:10px;border:1px solid var(--line2);display:flex;align-items:center;padding:0 12px;font-size:13px;color:var(--muted)}
+.c-input::after{content:'';width:1px;height:16px;background:var(--accent);margin-left:6px;animation:blink 1.1s steps(1) infinite}
+
+/* audit */
+.audit{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:64px;align-items:start}
+.audit .lead{margin-top:20px}
+.checks{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.checks li{display:flex;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);font-size:16px}
+.checks .ic{color:var(--accent);width:20px;height:20px}
+.audit-card{position:sticky;top:110px;padding:36px;border-radius:28px;border:1px solid var(--line2);background:var(--surface);display:flex;flex-direction:column;gap:18px}
+.card-k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.big-price{font-family:'Tektur',sans-serif;font-weight:600;font-size:50px;letter-spacing:-.02em;line-height:1}
+.big-price small{font-family:'Onest',sans-serif;font-size:18px;color:var(--muted);margin-right:10px;font-weight:400}
+.audit-card p{margin:0;color:var(--muted)}
+
+/* process */
+.proc{position:relative}
+.proc-line{position:absolute;left:22px;right:22px;top:22px;height:1px;background:var(--line2)}
+.proc-line i{position:absolute;inset:0;background:var(--accent);transform-origin:left}
+@keyframes draw{
+from{transform:scaleX(0)}
+to{transform:scaleX(1)}
+}
+.proc-grid{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px}
+.step{display:flex;flex-direction:column;gap:12px}
+.step-dot{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:1px solid var(--line2);font-family:'JetBrains Mono',monospace;font-size:14px;margin-bottom:12px;transition:background .3s,color .3s,border-color .3s}
+.step.opt .step-dot{border-style:dashed}
+.step:hover .step-dot{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.step h3{font-family:'Tektur',sans-serif;font-weight:600;font-size:20px;margin:0}
+.step p{margin:0;font-size:15px;color:var(--muted)}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:24px;align-items:start}
+.calc-steps{display:flex;flex-direction:column;gap:16px}
+.cstep{padding:32px;border-radius:26px;border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;gap:22px}
+.cstep-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.cstep-n{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent)}
+.cstep-h h3{font-family:'Tektur',sans-serif;font-weight:600;font-size:24px;margin:0}
+.cstep-hint{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.cfield{display:flex;flex-direction:column;gap:10px}
+.cfield-l{font-size:14px;color:var(--muted)}
+.seg{display:grid;gap:8px}
+.seg2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.seg3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.seg4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.sopt{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-height:64px;padding:12px 16px;border-radius:14px;border:1px solid var(--line2);background:transparent;color:var(--text);font-family:'Onest',sans-serif;text-align:left;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
+.sopt:hover{border-color:var(--text)}
+.sopt:active{transform:scale(.98)}
+.sopt .so-t{font-size:15px;font-weight:600;line-height:1.2}
+.sopt .so-s{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);line-height:1.35}
+.sopt.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.sopt.on .so-s{color:var(--accent)}
+.toggles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.tgl{display:flex;align-items:center;gap:14px;min-height:64px;padding:12px 16px;border-radius:14px;border:1px solid var(--line2);background:transparent;color:var(--text);font-family:'Onest',sans-serif;text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
+.tgl:hover{border-color:var(--text)}
+.tgl .swu{position:relative;width:42px;height:24px;border-radius:999px;background:var(--surface2);border:1px solid var(--line2);flex-shrink:0;transition:background .25s,border-color .25s}
+.tgl .swu i{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:transform .25s cubic-bezier(.2,.8,.2,1),background .25s}
+.tgl .tg-b{display:flex;flex-direction:column;gap:2px}
+.tgl .tg-t{font-size:15px;font-weight:600}
+.tgl .tg-s{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.tgl.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.tgl.on .swu{background:var(--accent);border-color:var(--accent)}
+.tgl.on .swu i{transform:translateX(18px);background:var(--ink)}
+.tgl.forced .tg-s{color:var(--accent)}
+.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.feat{display:grid;grid-template-columns:20px minmax(0,1fr);column-gap:12px;row-gap:2px;align-items:start;text-align:left;padding:14px 16px;min-height:44px;border-radius:14px;border:1px solid var(--line2);background:transparent;color:var(--text);font-family:'Onest',sans-serif;cursor:pointer;transition:border-color .2s,background .2s}
+.feat:hover{border-color:var(--text)}
+.feat .fbox{grid-row:1/3;width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line2);display:grid;place-items:center;margin-top:1px;transition:background .2s,border-color .2s}
+.feat .ft{font-size:14px;font-weight:500;line-height:1.3}
+.feat .fs{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.feat.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.feat.on .fbox{background:var(--accent);border-color:var(--accent)}
+.feat.on .fbox::after{content:'';width:8px;height:4px;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(-45deg) translate(1px,-1px)}
+.feat.on .fs{color:var(--accent)}
+.feat.dis{opacity:.45}
+.rng-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.rng-v{font-family:'Tektur',sans-serif;font-size:24px;font-weight:600}
+.rng-v small{font-family:'Onest',sans-serif;font-size:13px;color:var(--muted);font-weight:400;margin-left:10px}
+.range{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:var(--surface2);outline:none;margin:8px 0 0;cursor:pointer}
+.range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:var(--accent);border:6px solid var(--surface);box-shadow:0 0 0 1px var(--accent);transition:transform .2s}
+.range::-webkit-slider-thumb:hover{transform:scale(1.12)}
+.range::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--accent);border:6px solid var(--surface);box-shadow:0 0 0 1px var(--accent)}
+.range:focus-visible{outline:2px solid var(--accent);outline-offset:8px}
+.rng-scale{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim)}
+.csum{position:sticky;top:96px;padding:32px;border-radius:28px;border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);background:var(--surface);display:flex;flex-direction:column;gap:18px;box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
+.csum-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.csum-k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.csum-badge{font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);white-space:nowrap}
+.csum-total{font-family:'Tektur',sans-serif;font-weight:700;font-size:clamp(38px,3.5vw,52px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.csum-total small{font-family:'Onest',sans-serif;font-size:18px;color:var(--muted);font-weight:400;margin-right:10px;letter-spacing:0}
+.csum-range{font-size:14px;color:var(--muted);margin-top:-6px}
+.csum-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.cm{padding:14px 16px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.cm span{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.cm b{display:block;font-family:'Tektur',sans-serif;font-size:20px;font-weight:600;margin-top:4px}
+.cbar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--surface2)}
+.cbar i{display:block;height:100%;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.cb-dev{background:var(--accent)}.cb-des{background:#C3B1FF}.cb-ops{background:#EDEEE8}
+.clegend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:-8px}
+.clegend span{display:inline-flex;align-items:center;gap:6px}
+.clegend i{display:block;width:8px;height:8px;border-radius:2px}
+.clines{display:flex;flex-direction:column;border-top:1px solid var(--line);max-height:320px;overflow-y:auto}
+.cline{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.cline span{color:var(--muted)}
+.cline b{font-weight:500;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cline.mod b{color:var(--accent)}
+.cwarn{margin:0;font-size:13px;color:var(--accent)}
+.cnote{margin:0;font-size:12px;color:var(--dim)}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+.h2.big{font-size:clamp(44px,5.4vw,80px)}
+.contact-copy .lead{margin-top:24px}
+.helps{list-style:none;counter-reset:h;margin:28px 0 0;padding:0;display:flex;flex-direction:column}
+.helps li{counter-increment:h;display:flex;gap:18px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line);font-size:18px}
+.helps li::before{content:counter(h,decimal-leading-zero);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)}
+.direct{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.form{background:var(--surface);border:1px solid var(--line2);border-radius:28px;padding:36px;display:flex;flex-direction:column;gap:26px}
+.form-h{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line2);border-radius:0;padding:10px 0 12px;color:var(--text);font-family:'Onest',sans-serif;font-size:18px;outline:none;transition:border-color .25s}
+.input::placeholder{color:var(--dim)}
+.input:focus{border-bottom-color:var(--accent)}
+.area{resize:vertical;min-height:110px;line-height:1.5}
+.form-note{font-size:13px;color:var(--muted);margin:-8px 0 0}
+
+/* outro + footer */
+.outro{position:relative;padding:120px 0 0;border-top:1px solid var(--line)}
+.outro-k{font-size:14px;color:var(--muted);margin:0 0 24px}
+.outro-big{display:block;font-family:'Tektur',sans-serif;font-weight:700;font-size:clamp(44px,8.4vw,128px);line-height:.95;letter-spacing:-.03em;color:var(--text);transition:color .4s}
+.outro-big .l1{display:block}
+.outro-big .l2{display:flex;align-items:center;gap:.2em}
+.outro-big .ic{width:.72em;height:.72em;stroke-width:1.4;color:var(--accent);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.outro-big:hover{color:var(--accent)}
+.outro-big:hover .ic{transform:rotate(45deg)}
+.footer{margin-top:110px;border-top:1px solid var(--line);padding:32px 0}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.foot-links{display:flex;gap:24px;font-size:15px}
+.foot-links a{color:var(--muted);transition:color .2s}
+.foot-links a:hover{color:var(--accent)}
+.foot-c{font-size:12px;color:var(--dim)}
+
+/* scroll reveal: CSS scroll-driven, content stays visible where unsupported */
+@supports (animation-timeline: view()) {
+.rv{animation:rv both linear;animation-timeline:view();animation-range:entry 5% entry 85%}
+.proc-line i{animation:draw both linear;animation-timeline:view();animation-range:entry 40% cover 55%}
+.outro-big{animation:outroIn both linear;animation-timeline:view();animation-range:entry 0% cover 40%}
+}
+@keyframes rv{
+from{opacity:0;translate:0 56px}
+to{opacity:1;translate:0 0}
+}
+@keyframes outroIn{
+from{opacity:.15;translate:-6% 0}
+to{opacity:1;translate:0 0}
+}
+
+/* responsive */
+@media (max-width:1100px){
+.nav-links{display:none}
+.hero-grid{grid-template-columns:minmax(0,1fr)}
+.stage{margin:24px auto 0}
+.sec-head{grid-template-columns:minmax(0,1fr);gap:20px}
+.sec-head .lead{justify-self:start}
+.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ops{grid-template-columns:minmax(0,1fr)}
+.design-grid{grid-template-columns:minmax(0,1fr)}
+.case{grid-template-columns:minmax(0,1fr);position:relative;top:auto !important}
+.case-vis{min-height:460px;border-left:0;border-top:1px solid var(--line)}
+.xf-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.xf-item,.xf-item+.xf-item{padding:20px 20px 16px 0;border-left:0;border-bottom:1px solid var(--line)}
+.audit,.contact-grid,.calc{grid-template-columns:minmax(0,1fr)}
+.audit-card,.csum{position:relative;top:auto}
+.feats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.proc-grid{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:40px}
+.proc-line{display:none}
+.xp-row{grid-template-columns:120px minmax(0,1fr);gap:20px}
+.xp-a{grid-column:2/-1}
+}
+@media (max-width:680px){
+.page{font-size:16px}
+.wrap{padding:0 20px}
+.section{padding:88px 0}
+.hero{padding:56px 0}
+.logo-sub{display:none}
+.stage{zoom:.56}
+.stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stat{padding:28px 18px;border-bottom:1px solid var(--line)}
+.stat:nth-child(2n){border-right:0}
+.stat:last-child{grid-column:1/-1;border-bottom:0}
+.stat-num{font-size:48px}
+.svc-grid{grid-template-columns:minmax(0,1fr)}
+.span2{grid-column:auto}
+.svc.wide{flex-direction:column;align-items:stretch;gap:20px;padding:32px}
+.ops-body{padding:22px 16px}
+.stg i{width:26px;height:26px}
+.stg-track{top:12px}
+.stg{font-size:9px}
+.term{font-size:11px;padding:12px 14px}
+.ops-card{padding:26px}
+.ds{grid-template-columns:minmax(0,1fr);height:auto}
+.ds-screen{height:470px}
+.cmp-old,.cmp-new{padding:18px 16px;font-size:15px;gap:10px}
+.cmp-head .cmp-old,.cmp-head .cmp-new{padding:14px 16px;font-size:11px}
+.case-copy{padding:28px}
+.case-vis{zoom:.62;min-height:560px}
+.xp-feat{padding:26px;gap:22px}
+.xf-grid{grid-template-columns:minmax(0,1fr)}
+.xf-row{grid-template-columns:minmax(0,1fr);gap:10px}
+.proc-grid{grid-template-columns:minmax(0,1fr)}
+.xp-row{grid-template-columns:minmax(0,1fr);gap:10px}
+.xp-a{grid-column:auto}
+.checks{grid-template-columns:minmax(0,1fr)}
+.form,.audit-card,.cstep,.csum{padding:24px}
+.seg4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.seg3,.feats,.toggles{grid-template-columns:minmax(0,1fr)}
+.csum-total{font-size:38px}
+.btn{height:50px;padding:0 20px}
+.big-price{font-size:40px}
+.foot{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+.page *,.page *::before,.page *::after{animation:none !important;transition-duration:.01ms !important}
+}
+.page.still *,.page.still *::before,.page.still *::after{animation:none !important}
+</style>
+
+<style>
+section[id]{scroll-margin-top:80px}
+.feat:disabled{cursor:not-allowed}
+</style>
+<!-- Аналитика: вставьте сюда код счётчика Яндекс Метрики -->
+</head>
+<body>
+<div class="page">
+
+<header class="nav">
+<div class="wrap nav-in">
+<a class="logo" href="#top" aria-label="На главный экран"><span class="logo-name">cod<span class="logo-er">ER</span></span><span class="logo-sub">/ senior lead fullstack</span></a>
+<nav class="nav-links" aria-label="Разделы">
+<a href="#services">Услуги</a>
+<a href="#devops">DevOps</a>
+<a href="#cases">Кейсы</a>
+<a href="#about">Опыт</a>
+<a href="#calc">Калькулятор</a>
+</nav>
+<a class="btn btn-primary btn-sm" href="#contact">Обсудить проект</a>
+</div>
+</header>
+
+<section class="hero" id="top">
+<div class="hero-grid-bg"></div>
+<div class="wrap hero-grid">
+<div>
+<div class="eyebrow fade" style="animation-delay:.05s"><span class="pulse"></span>Senior Lead Fullstack · Kotlin-first</div>
+<h1 class="hero-title" aria-label="Создам цифровой продукт под ключ"><span class="w"><span style="animation-delay:.15s">Создам</span></span><span class="w"><span style="animation-delay:.23s">цифровой</span></span><span class="w"><span style="animation-delay:.31s">продукт</span></span><span class="w accent"><span style="animation-delay:.39s">под&nbsp;ключ</span></span></h1>
+<div class="hero-tags fade" style="animation-delay:.6s"><span class="htag">Android</span><span class="htag">iOS</span><span class="htag">Web</span><span class="htag">Backend</span><span class="htag hot">DevOps</span><span class="htag hot">Поддержка</span><span class="htag opt">+ дизайн по запросу</span></div>
+<p class="hero-lead fade" style="animation-delay:.7s">От идеи до production и поддержки после запуска — <b>напрямую с Senior/Lead-разработчиком</b>, без агентской наценки.</p>
+<div class="hero-cta fade" style="animation-delay:.8s">
+<a class="btn btn-primary" href="https://t.me/erogov86" target="_blank" rel="noopener">Обсудить проект<svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<a class="btn btn-ghost" href="#calc">Рассчитать стоимость</a>
+</div>
+<div class="hero-note fade" style="animation-delay:.9s"><svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Первичная оценка проекта — бесплатно</div>
+</div>
+
+<div class="stage" aria-hidden="true">
+<div class="st st-admin" style="animation-delay:.45s">
+<div class="win float" style="animation-duration:8s">
+<div class="win-bar"><i></i><i></i><i></i><span class="win-title">admin / клиенты</span></div>
+<div class="adm">
+<div class="adm-side"><b class="on"></b><b></b><b></b><b></b><b></b></div>
+<div class="adm-main">
+<div class="adm-head"><span class="adm-h">Активность</span><span class="adm-chip">live</span></div>
+<div class="bars"><i style="height:45%;animation-delay:-.2s"></i><i style="height:70%;animation-delay:-.7s"></i><i style="height:55%;animation-delay:-1.3s"></i><i style="height:85%;animation-delay:-1.9s"></i><i style="height:60%;animation-delay:-2.4s"></i><i class="hi" style="height:100%;animation-delay:-2.9s"></i><i style="height:75%;animation-delay:-3.3s"></i><i style="height:50%;animation-delay:-3.7s"></i></div>
+<div class="adm-row"><span class="av"></span><span class="sk w45"></span><span class="ok">активен</span></div>
+<div class="adm-row"><span class="av"></span><span class="sk w60"></span><span class="ok">активен</span></div>
+<div class="adm-row"><span class="av"></span><span class="sk w40"></span><span class="ok">приглашён</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="st st-phone" style="animation-delay:.3s">
+<div class="phone float" style="animation-duration:7s;animation-delay:-2s">
+<div class="ph-screen">
+<div class="ph-notch"></div>
+<div class="ph-top"><span class="ph-small">Сегодня</span><span class="ph-av"></span></div>
+<div class="ph-title">Тренировка A</div>
+<div class="ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="50"></circle><circle class="ring-fg" cx="60" cy="60" r="50"></circle></svg><div class="ring-val"><span>72<small>%</small></span></div></div>
+<div class="ph-list">
+<div class="ph-item done"><span class="chk"></span><span>Разминка</span><span class="m">8 мин</span></div>
+<div class="ph-item done"><span class="chk"></span><span>Присед</span><span class="m">4×8</span></div>
+<div class="ph-item"><span class="chk"></span><span>Жим лёжа</span><span class="m">4×6</span></div>
+</div>
+<div class="ph-btn">Продолжить</div>
+</div>
+</div>
+</div>
+
+<div class="st st-code" style="animation-delay:.6s">
+<div class="code float" style="animation-duration:9s;animation-delay:-4s">
+<div class="code-bar"><span class="code-file">WorkoutRepository.kt</span><span class="code-src">commonMain</span></div>
+<div class="code-body">
+<div class="ln"><span class="c-cm">// shared: один код для Android и iOS</span></div>
+<div class="ln"><span class="c-kw">class </span><span class="c-ty">WorkoutRepository</span>(</div>
+<div class="ln i1"><span class="c-kw">private val </span>api: <span class="c-ty">WorkoutApi</span>,</div>
+<div class="ln i1"><span class="c-kw">private val </span>store: <span class="c-ty">LocalStore</span>,</div>
+<div class="ln">) {</div>
+<div class="ln i1"><span class="c-kw">fun </span><span class="c-fn">workouts</span>(): <span class="c-ty">Flow</span>&lt;<span class="c-ty">List</span>&lt;<span class="c-ty">Workout</span>&gt;&gt; =</div>
+<div class="ln i2">store.<span class="c-fn">observeAll</span>()</div>
+<div class="ln i3">.<span class="c-fn">onStart</span> { <span class="c-fn">sync</span>() }<span class="caret"></span></div>
+<div class="ln">}</div>
+</div>
+</div>
+</div>
+
+<div class="st st-tag" style="left:-28px;top:170px;animation-delay:.9s"><span class="ftag float" style="animation-duration:6s"><i></i>Android + iOS</span></div>
+<div class="st st-tag" style="right:16px;top:-18px;animation-delay:1s"><span class="ftag float" style="animation-duration:7s;animation-delay:-3s"><i></i>Web Admin</span></div>
+<div class="st st-tag" style="left:262px;top:280px;animation-delay:1.1s"><span class="ftag float" style="animation-duration:6.5s;animation-delay:-1s"><i></i>Ktor · PostgreSQL</span></div>
+<div class="st st-tag" style="left:40px;top:556px;animation-delay:1.2s"><span class="ftag float" style="animation-duration:7.5s;animation-delay:-5s"><i></i>CI/CD → production</span></div>
+</div>
+</div>
+</section>
+
+<div class="marquee" aria-label="Технологии">
+<div class="mq-track">
+<div class="mq-group"><span class="mq-item">Kotlin</span><i class="mq-sep"></i><span class="mq-item">Kotlin Multiplatform</span><i class="mq-sep"></i><span class="mq-item">Compose Multiplatform</span><i class="mq-sep"></i><span class="mq-item">Ktor</span><i class="mq-sep"></i><span class="mq-item">PostgreSQL</span><i class="mq-sep"></i><span class="mq-item">Redis</span><i class="mq-sep"></i><span class="mq-item">React</span><i class="mq-sep"></i><span class="mq-item">TypeScript</span><i class="mq-sep"></i><span class="mq-item">Docker</span><i class="mq-sep"></i><span class="mq-item">GitHub Actions</span><i class="mq-sep"></i><span class="mq-item">Terraform</span><i class="mq-sep"></i><span class="mq-item">Yandex Cloud</span><i class="mq-sep"></i><span class="mq-item">LLM</span><i class="mq-sep"></i></div>
+<div class="mq-group" aria-hidden="true"><span class="mq-item">Kotlin</span><i class="mq-sep"></i><span class="mq-item">Kotlin Multiplatform</span><i class="mq-sep"></i><span class="mq-item">Compose Multiplatform</span><i class="mq-sep"></i><span class="mq-item">Ktor</span><i class="mq-sep"></i><span class="mq-item">PostgreSQL</span><i class="mq-sep"></i><span class="mq-item">Redis</span><i class="mq-sep"></i><span class="mq-item">React</span><i class="mq-sep"></i><span class="mq-item">TypeScript</span><i class="mq-sep"></i><span class="mq-item">Docker</span><i class="mq-sep"></i><span class="mq-item">GitHub Actions</span><i class="mq-sep"></i><span class="mq-item">Terraform</span><i class="mq-sep"></i><span class="mq-item">Yandex Cloud</span><i class="mq-sep"></i><span class="mq-item">LLM</span><i class="mq-sep"></i></div>
+</div>
+</div>
+
+<section class="stats-sec" aria-label="Коротко в цифрах">
+<div class="wrap">
+<div class="stats" id="stats">
+<div class="stat rv"><div class="stat-num"><span data-to="13">13</span><em>+</em></div><div class="stat-label">лет коммерческой разработки</div></div>
+<div class="stat rv"><div class="stat-num"><span data-to="14">14</span></div><div class="stat-label">приложений в Google Play, App Store и RuStore, над которыми я работал</div></div>
+<div class="stat rv"><div class="stat-num"><span data-from="4" data-to="0">0</span></div><div class="stat-label">менеджеров-посредников между нами</div></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="services">
+<div class="wrap">
+<div class="sec-head">
+<div class="rv"><div class="kicker">01 / Услуги</div><h2 class="h2">Что можно заказать</h2></div>
+<p class="lead rv">Цены указаны «от». Точный расчёт под вашу задачу — в калькуляторе ниже.</p>
+</div>
+<div class="svc-grid">
+<a class="svc featured span2 rv" href="#calc">
+<div class="svc-top"><span class="svc-idx">01</span><span class="svc-badge">самый полный формат</span></div>
+<h3>Цифровой продукт под ключ</h3>
+<div class="chips"><span>Android</span><span>iOS</span><span>Backend</span><span>Web Admin</span><span>DevOps</span><span class="opt">+ дизайн по запросу</span></div>
+<p>Для стартапов, сервисов, маркетплейсов, SaaS и внутренних продуктов бизнеса.</p>
+<div class="svc-price"><div class="price"><small>от</small>900&nbsp;000&nbsp;₽</div><span class="svc-arrow"><svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></div>
+</a>
+<a class="svc rv" href="#calc">
+<div class="svc-top"><span class="svc-idx">02</span></div>
+<h3>Мобильное приложение</h3>
+<p>Android — или сразу Android + iOS на Kotlin Multiplatform, от 700&nbsp;000&nbsp;₽: одна кодовая база для двух платформ.</p>
+<div class="svc-price"><div class="price"><small>от</small>500&nbsp;000&nbsp;₽</div><span class="svc-arrow"><svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></div>
+</a>
+<a class="svc rv" href="#calc">
+<div class="svc-top"><span class="svc-idx">03</span></div>
+<h3>Web-сервис</h3>
+<p>Личные кабинеты, CRM, административные панели и внутренние системы.</p>
+<div class="svc-price"><div class="price"><small>от</small>300&nbsp;000&nbsp;₽</div><span class="svc-arrow"><svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></div>
+</a>
+<a class="svc hl span2 rv" href="#devops">
+<div class="svc-top"><span class="svc-idx">04</span><span class="svc-badge alt">после запуска</span></div>
+<h3>DevOps и поддержка</h3>
+<div class="chips"><span>CI/CD</span><span>Docker</span><span>Terraform</span><span>Мониторинг</span><span>Релизы</span><span>Развитие</span></div>
+<p>Инфраструктура и релизы под ключ, а после запуска — мониторинг, исправления и новые функции.</p>
+<div class="svc-price"><div class="price"><small>поддержка от</small>100&nbsp;000&nbsp;₽<small class="per">/мес</small></div><span class="svc-arrow"><svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></div>
+</a>
+<a class="svc rv" href="#calc">
+<div class="svc-top"><span class="svc-idx">05</span></div>
+<h3>Подключение аналитики</h3>
+<div class="chips"><span>События</span><span>Воронки</span><span>Метрики</span><span>Дашборды</span></div>
+<p>Сбор событий, воронки и продуктовые метрики — чтобы решения по продукту принимались на данных.</p>
+<div class="svc-price"><div class="price"><small>от</small>80&nbsp;000&nbsp;₽</div><span class="svc-arrow"><svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></div>
+</a>
+<a class="svc wide span2 rv" href="#design">
+<div class="svc-top"><span class="svc-idx">06</span><span class="opt-badge">по запросу</span></div>
+<div class="svc-body">
+<h3>UX/UI-дизайн</h3>
+<p>Сценарии, прототипы и макеты в Figma — если своих нет.</p>
+</div>
+<div class="svc-price"><div class="price soft">После оценки</div><span class="svc-arrow"><svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></div>
+</a>
+</div>
+</div>
+</section>
+
+<section class="section" id="model">
+<div class="wrap">
+<div class="sec-head">
+<div class="rv"><div class="kicker">02 / Почему не студия</div><h2 class="h2">Senior-экспертиза без структуры большой студии</h2></div>
+<p class="lead rv">Меньше звеньев — меньше потерь на коммуникации и дешевле результат.</p>
+</div>
+<div class="cmp">
+<div class="cmp-row cmp-head"><div class="cmp-old">Большая студия</div><div class="cmp-new">Работа со мной</div></div>
+<div class="cmp-row rv"><div class="cmp-old"><span class="ico-c"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Account, PM и несколько уровней коммуникации</div><div class="cmp-new"><span class="ico-c"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Прямое общение с разработчиком</div></div>
+<div class="cmp-row rv"><div class="cmp-old"><span class="ico-c"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Mobile, backend и web делают разные люди</div><div class="cmp-new"><span class="ico-c"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Один ответственный за всю архитектуру</div></div>
+<div class="cmp-row rv"><div class="cmp-old"><span class="ico-c"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Значительные накладные расходы</div><div class="cmp-new"><span class="ico-c"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Бюджет идёт в продукт, а не в структуру</div></div>
+<div class="cmp-row rv"><div class="cmp-old"><span class="ico-c"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>Поддержку после релиза передают другой команде</div><div class="cmp-new"><span class="ico-c"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Кто писал код, тот его и поддерживает</div></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="devops">
+<div class="wrap">
+<div class="sec-head">
+<div class="rv"><div class="kicker">03 / DevOps и поддержка</div><h2 class="h2">Продукт не заканчивается на релизе</h2></div>
+<p class="lead rv">Не нужно искать отдельного DevOps-инженера и подрядчика на поддержку.</p>
+</div>
+<div class="ops">
+<div class="ops-vis rv" aria-hidden="true">
+<div class="ops-bar"><span class="mono">pipeline · main</span><span class="ops-status"><i></i>production</span></div>
+<div class="ops-body">
+<div class="stages">
+<div class="stg-track"><i></i></div>
+<div class="stg s0"><i></i><span>commit</span></div>
+<div class="stg s1"><i></i><span>build</span></div>
+<div class="stg s2"><i></i><span>test</span></div>
+<div class="stg s3"><i></i><span>docker</span></div>
+<div class="stg s4"><i></i><span>deploy</span></div>
+<div class="stg s5"><i></i><span>monitor</span></div>
+</div>
+<div class="term">
+<div class="tl l0"><span class="p">$</span><span>git push origin main</span></div>
+<div class="tl l1"><span class="okc"></span><span>build · gradle</span><span class="dim">ci</span></div>
+<div class="tl l2"><span class="okc"></span><span>tests passed</span><span class="dim">ci</span></div>
+<div class="tl l3"><span class="okc"></span><span>image pushed → registry</span><span class="dim">ci</span></div>
+<div class="tl l4"><span class="okc"></span><span>deploy → production</span><span class="dim">cd</span></div>
+<div class="tl l5"><span class="okc"></span><span>healthcheck · 200 OK</span><span class="dim">mon</span></div>
+</div>
+<div class="mon">
+<div class="mon-h"><span>traffic</span><span class="accent">all systems healthy</span></div>
+<svg class="spark" viewBox="0 0 560 80"><path class="area" d="M0 58L35 54L70 56L105 48L140 52L175 44L210 48L245 36L280 42L315 40L350 30L385 36L420 32L455 34L490 26L525 30L560 22L560 80L0 80Z"></path><path class="line" d="M0 58L35 54L70 56L105 48L140 52L175 44L210 48L245 36L280 42L315 40L350 30L385 36L420 32L455 34L490 26L525 30L560 22"></path></svg>
+<div class="svcs"><span><i></i>api</span><span><i></i>postgres</span><span><i></i>redis</span><span><i></i>workers</span><span><i></i>push</span></div>
+</div>
+</div>
+</div>
+<div class="ops-cards">
+<div class="ops-card rv">
+<div class="ops-card-h"><svg class="ic" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.1 9.5 4.25 4.25 0 0 0 7 18z"></path></svg><h3>DevOps</h3></div>
+<ul class="ops-list">
+<li>CI/CD на GitHub Actions и GitLab CI</li>
+<li>Docker, Terraform, Yandex Cloud</li>
+<li>Мониторинг, логи и алерты</li>
+<li>Автоматические сборки и релизы в сторы</li>
+</ul>
+</div>
+<div class="ops-card hi rv">
+<div class="ops-card-h"><svg class="ic" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.6-4.5M4 4v4h4"></path><path d="M4 13a8 8 0 0 0 14.6 4.5M20 20v-4h-4"></path></svg><h3>Поддержка</h3></div>
+<ul class="ops-list">
+<li>Исправления и стабилизация production</li>
+<li>Обновления SDK и под новые версии ОС</li>
+<li>Оптимизация производительности</li>
+<li>Новые функции по данным и обратной связи</li>
+</ul>
+<div class="ops-cta"><a class="btn btn-primary btn-sm" href="#contact">Обсудить поддержку<svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="cases">
+<div class="wrap">
+<div class="sec-head">
+<div class="rv"><div class="kicker">04 / Кейсы</div><h2 class="h2">Примеры продуктов</h2></div>
+<p class="lead rv">Мобильные клиенты, backend, web-админки и AI.</p>
+</div>
+<div class="cases">
+
+<article class="case" style="top:104px">
+<div class="case-copy">
+<div class="case-meta"><span class="case-n">01</span><span>Mobile + Web Admin</span></div>
+<h3 class="case-title">Fitness / Coaching Platform</h3>
+<p class="case-sub">Мобильное приложение для спортсменов и web-система для тренеров.</p>
+<p class="case-desc">Спроектирована архитектура продукта. Реализованы роли спортсмена и тренера, тренировки, измерения, соревнования, система приглашений и управление клиентами.</p>
+<div class="chips"><span>Android</span><span>Kotlin Multiplatform</span><span>Compose</span><span>Backend</span><span>Web Admin</span></div>
+</div>
+<div class="case-vis" aria-hidden="true">
+<div class="v1">
+<div>
+<div class="mini-label">Спортсмен</div>
+<div class="mp"><div class="mp-in">
+<div class="mp-h">Неделя 3</div>
+<div class="mp-days"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+<div class="mp-card"><span class="sk w60"></span><span class="sk w40"></span></div>
+<div class="mp-card acc">Соревнование</div>
+<div class="mp-card"><span class="sk w70"></span><span class="sk w45"></span></div>
+<div class="mp-card"><span class="sk w55"></span></div>
+</div></div>
+</div>
+<div class="v1-link"><i></i></div>
+<div>
+<div class="mini-label">Тренер</div>
+<div class="ma">
+<div class="ma-bar"><i></i><i></i><i></i></div>
+<div class="ma-body">
+<div class="ma-row"><span class="av"></span><span class="sk w70"></span><span class="prog"><i style="width:85%"></i></span></div>
+<div class="ma-row"><span class="av"></span><span class="sk w55"></span><span class="prog"><i style="width:60%;animation-delay:-.8s"></i></span></div>
+<div class="ma-row"><span class="av"></span><span class="sk w80"></span><span class="prog"><i style="width:95%;animation-delay:-1.6s"></i></span></div>
+<div class="ma-row"><span class="av"></span><span class="sk w45"></span><span class="prog"><i style="width:40%;animation-delay:-2.4s"></i></span></div>
+<div class="ma-row"><span class="av"></span><span class="sk w60"></span><span class="prog"><i style="width:70%;animation-delay:-1.2s"></i></span></div>
+</div>
+<div class="ma-foot"><span>тренировки</span><span>замеры</span><span>приглашения</span></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+
+<article class="case" style="top:128px">
+<div class="case-copy">
+<div class="case-meta"><span class="case-n">02</span><span>Mobile + Web Admin + Backend</span></div>
+<h3 class="case-title">HR / Employee Platform</h3>
+<p class="case-sub">Мобильное приложение и административная система для сотрудников.</p>
+<p class="case-desc">Структура организации, сотрудники, роли и права, уведомления, branding и рабочие пространства.</p>
+<div class="chips"><span>Mobile</span><span>Web Admin</span><span>Backend</span></div>
+</div>
+<div class="case-vis" aria-hidden="true">
+<div class="roles"><span>Admin</span><span>Manager</span><span>Employee</span></div>
+<div class="org">
+<div class="node root"><span class="av"></span>Компания</div>
+<div class="stem"></div>
+<div class="org-kids">
+<div class="org-cell"><div class="stem"></div><div class="node"><span class="av"></span>Продажи</div><div class="stem short"></div><div class="ppl"><i></i><i></i><i class="a"></i></div></div>
+<div class="org-cell"><div class="stem"></div><div class="node"><span class="av"></span>Разработка</div><div class="stem short"></div><div class="ppl"><i class="a"></i><i></i><i></i><i></i></div></div>
+<div class="org-cell"><div class="stem"></div><div class="node"><span class="av"></span>HR</div><div class="stem short"></div><div class="ppl"><i></i><i class="a"></i></div></div>
+</div>
+</div>
+<div class="toast"><span class="t-dot"></span><div><b>Новое уведомление</b><small>Обновлена структура отдела</small></div></div>
+</div>
+</article>
+
+<article class="case" style="top:152px">
+<div class="case-copy">
+<div class="case-meta"><span class="case-n">03</span><span>Backend + AI</span></div>
+<h3 class="case-title">AI Report Platform</h3>
+<p class="case-sub">Платформа автоматического создания аналитических отчётов с использованием LLM.</p>
+<p class="case-desc">Pipeline генерации отчётов, контроль качества результатов и production-инфраструктура.</p>
+<div class="chips"><span>Backend</span><span>AI</span><span>Workers</span><span>Redis</span><span>Docker</span></div>
+</div>
+<div class="case-vis" aria-hidden="true">
+<div class="pipe">
+<div class="pipe-track"><i class="pipe-dot"></i><i class="pipe-dot d2"></i></div>
+<div class="pnode"><span class="pn-i">01</span><div class="pn-c"><b>Данные</b><small>input</small></div></div>
+<div class="pnode"><span class="pn-i">02</span><div class="pn-c"><b>Очередь задач</b><small>redis</small></div></div>
+<div class="pnode"><span class="pn-i">03</span><div class="pn-c"><b>Workers</b><small>docker</small></div></div>
+<div class="pnode acc"><span class="pn-i">04</span><div class="pn-c"><b>LLM</b><small>generate</small></div></div>
+<div class="pnode"><span class="pn-i">05</span><div class="pn-c"><b>Контроль качества</b><small>qa</small></div></div>
+<div class="pnode"><span class="pn-i">06</span><div class="pn-c"><b>Отчёт</b><small>output</small></div></div>
+</div>
+</div>
+</article>
+
+</div>
+</div>
+</section>
+
+<section class="section" id="about">
+<div class="wrap">
+<div class="sec-head">
+<div class="rv"><div class="kicker">05 / Опыт</div><h2 class="h2">Последний проект и путь до него</h2></div>
+<p class="lead rv">Веду продукт end-to-end — от архитектуры до production: backend на Ktor, клиенты на Kotlin Multiplatform, web-админки и инфраструктура.</p>
+</div>
+
+<article class="xp-feat rv">
+<div class="xf-head">
+<div class="xf-meta"><span class="xf-now"><i></i>сейчас</span><span class="mono">январь 2026 — настоящее время</span></div>
+<div class="xf-links">
+<a href="https://www.rustore.ru/catalog/app/com.kathleta.app" target="_blank" rel="noopener">Приложение в RuStore<svg class="ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+<a href="https://kathleta.ru/" target="_blank" rel="noopener">kathleta.ru<svg class="ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></a>
+</div>
+</div>
+<div class="xf-title"><h3 class="xf-company">KathletA</h3><span class="xf-role">Mobile / Fullstack Tech Lead</span></div>
+<p class="xf-lead">Fitness/wellness-продукт с нуля: мобильное приложение для пользователей и web-админка для управления системой.</p>
+<div class="xf-grid">
+<div class="xf-item"><span class="xf-n">01</span><h4>Архитектура на KMP</h4><p>Мобильный клиент на Kotlin Multiplatform / Compose Multiplatform и интеграция backend API.</p></div>
+<div class="xf-item"><span class="xf-n">02</span><h4>AI-персонализация</h4><p>Генерация тренировок по целям, уровню подготовки, ограничениям и доступному инвентарю.</p></div>
+<div class="xf-item"><span class="xf-n">03</span><h4>Web-админка</h4><p>Роли и права, контент, программы и настройки — управление системой без правок в базе данных.</p></div>
+<div class="xf-item"><span class="xf-n">04</span><h4>Руководство командой</h4><p>Декомпозиция задач, code review и координация junior- и middle-разработчика.</p></div>
+</div>
+<div class="xf-row"><span class="xf-k">Модули</span><div class="chips"><span>Onboarding</span><span>Библиотека упражнений</span><span>Тренировки и программы</span><span>Активная сессия</span><span>Прогресс и замеры</span><span>AI-чат</span><span>Free / Pro и подписки</span></div></div>
+<div class="xf-row"><span class="xf-k">Стек</span><div class="chips"><span>Kotlin Multiplatform</span><span>Compose Multiplatform</span><span>Ktor</span><span>PostgreSQL</span><span>Redis</span><span>Docker</span><span>GitHub Actions</span><span>RuStore Pay</span><span>Firebase</span><span>Python</span><span>TypeScript</span><span>LLM</span></div></div>
+</article>
+
+<div class="xp">
+<div class="xp-head mono rv"><span>Ранее</span><span>2015 — 2026</span></div>
+<div class="xp-row rv"><span class="xp-y mono">2021 — 2026</span><div class="xp-co"><span class="xp-c">Tripster</span><span class="xp-r">Senior Android Developer</span></div><ul class="xp-a"><li>Приложения для путешественников и гидов с нуля: MVVM/MVI, Clean Architecture, offline-режим и синхронизация данных.</li><li>Оптимизация запуска и памяти, CI/CD и релизы в Google Play и RuStore, менторинг разработчиков.</li></ul></div>
+<div class="xp-row rv"><span class="xp-y mono">2020 — 2021</span><div class="xp-co"><span class="xp-c">Qlean</span><span class="xp-r">Senior Android Developer</span></div><ul class="xp-a"><li>Архитектура четырёх Android-приложений сервиса — от суперапа до приложения исполнителей, Kotlin и Kotlin Multiplatform.</li><li>REST/GraphQL, кеширование, unit- и integration-тесты, работа с legacy и улучшение CI/CD.</li></ul></div>
+<div class="xp-row rv"><span class="xp-y mono">2018 — 2020</span><div class="xp-co"><span class="xp-c">Tangem</span><span class="xp-r">Senior Android Developer</span></div><ul class="xp-a"><li>Основное мобильное приложение и публичные SDK для интеграции продуктов компании в сторонние решения.</li><li>Совместная работа с командами Blockchain, QA и Product.</li></ul></div>
+<div class="xp-row rv"><span class="xp-y mono">2015 — 2018</span><div class="xp-co"><span class="xp-c">PromoPult</span><span class="xp-r">Mobile Developer</span></div><ul class="xp-a"><li>Полный цикл: три Android-приложения с нуля и развитие трёх iOS-приложений компании.</li></ul></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="design">
+<div class="wrap design-grid">
+<div class="design-copy">
+<div class="kicker rv">06 / Дизайн — по запросу</div>
+<h2 class="h2 rv">Нет дизайна? Он станет частью разработки</h2>
+<p class="lead rv">Сценарии и интерфейсы проектируются до начала разработки — сразу с учётом архитектуры. Если макеты уже есть, работаю по ним.</p>
+<ul class="dlist rv">
+<li>UX-сценарии и wireframes</li>
+<li>Интерактивный прототип</li>
+<li>UI-концепция</li>
+<li>Мобильный и адаптивный web-дизайн</li>
+<li>UI Kit и Design System</li>
+<li>Макеты, готовые к разработке</li>
+</ul>
+</div>
+<div class="ds rv" aria-hidden="true">
+<div class="ds-screen">
+<div class="ds-badge"><span class="b-wf">wireframe</span><span class="b-ui">ui</span></div>
+<div class="ds-layer wf">
+<div class="wf-bar"></div>
+<div class="wf-img"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M0 0L100 60M100 0L0 60"></path></svg></div>
+<div class="wf-line w70"></div>
+<div class="wf-line w45"></div>
+<div class="wf-row"></div>
+<div class="wf-row"></div>
+<div class="wf-btn"></div>
+</div>
+<div class="ds-layer ui">
+<div class="ui-top"><span class="ui-h">Каталог</span><span class="ui-dot"></span></div>
+<div class="ui-img"><span class="ui-sun"></span><span class="ui-hill"></span></div>
+<div class="ui-t">Программа на 8 недель</div>
+<div class="ui-s">Силовая · 3 раза в неделю</div>
+<div class="ui-row"><span class="av"></span><span>Тренер</span><b>PRO</b></div>
+<div class="ui-row"><span class="av"></span><span>Инвентарь</span><b>ДОМА</b></div>
+<div class="ui-btn">Начать программу</div>
+</div>
+<div class="scan"></div>
+</div>
+<div class="ds-tokens">
+<div class="tok-label">design tokens</div>
+<div class="swatches">
+<div class="sw"><i class="sw-a"></i><span>accent</span></div>
+<div class="sw"><i class="sw-t"></i><span>text</span></div>
+<div class="sw"><i class="sw-s"></i><span>surface</span></div>
+<div class="sw"><i class="sw-m"></i><span>muted</span></div>
+</div>
+<div class="tok-label">typography</div>
+<div class="type-spec"><span class="aa">Aa</span><div><div class="ts-1">Tektur</div><div class="ts-2">Onest · JetBrains Mono</div></div></div>
+<div class="tok-label">components</div>
+<div class="comp"><span class="c-btn">Кнопка</span><span class="c-btn ghost">Вторичная</span></div>
+<div class="comp"><span class="toggle"><i></i></span><span class="c-check"></span><span class="c-input">Поле ввода</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="audit">
+<div class="wrap audit">
+<div>
+<div class="kicker rv">07 / Уже начали разработку?</div>
+<h2 class="h2 rv">Подключусь к существующему продукту</h2>
+<p class="lead rv">Не обязательно всё переписывать с нуля.</p>
+<ul class="checks rv">
+<li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Исправить архитектурные проблемы</li>
+<li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Закончить незавершённый продукт</li>
+<li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Стабилизировать production</li>
+<li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Перевести на Compose или KMP</li>
+<li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Подготовить к масштабированию</li>
+<li><svg class="ic" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Взять продукт на поддержку</li>
+</ul>
+</div>
+<aside class="audit-card rv">
+<span class="card-k">Технический аудит</span>
+<div class="big-price"><small>от</small>50&nbsp;000&nbsp;₽</div>
+<p>Разберу архитектуру, код и инфраструктуру и покажу, что исправить в первую очередь.</p>
+<a class="btn btn-primary" href="#contact">Заказать аудит<svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</aside>
+</div>
+</section>
+
+<section class="section" id="process">
+<div class="wrap">
+<div class="sec-head">
+<div class="rv"><div class="kicker">08 / Процесс</div><h2 class="h2">Как проходит работа</h2></div>
+<p class="lead rv">Короткие итерации — вы регулярно видите рабочий продукт, а не отчёты о нём.</p>
+</div>
+<div class="proc">
+<div class="proc-line"><i></i></div>
+<div class="proc-grid">
+<div class="step rv"><span class="step-dot">1</span><h3>Обсуждение</h3><p>Идея, бизнес-задача и будущие пользователи.</p></div>
+<div class="step rv"><span class="step-dot">2</span><h3>Проектирование</h3><p>MVP, архитектура и инфраструктура.</p></div>
+<div class="step opt rv"><span class="step-dot">3</span><h3>Дизайн</h3><p>При необходимости — прототип и интерфейсы.</p></div>
+<div class="step rv"><span class="step-dot">4</span><h3>Разработка</h3><p>Итерации с рабочим результатом.</p></div>
+<div class="step rv"><span class="step-dot">5</span><h3>Запуск</h3><p>CI/CD, production и публикация в сторах.</p></div>
+<div class="step rv"><span class="step-dot">6</span><h3>Поддержка</h3><p>Мониторинг, обновления и развитие.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="calc">
+<div class="wrap">
+<div class="sec-head">
+<div class="rv"><div class="kicker">09 / Калькулятор</div><h2 class="h2">Рассчитайте стоимость проекта</h2></div>
+<p class="lead rv">Соберите конфигурацию — итог пересчитывается сразу.</p>
+</div>
+<div class="calc">
+<div class="calc-steps">
+
+<div class="cstep rv">
+<div class="cstep-h"><span class="cstep-n">01</span><h3>Платформы</h3><span class="cstep-hint">что разрабатываем</span></div>
+<div class="cfield"><span class="cfield-l" id="lbl-mobile">Мобильное приложение</span><div class="seg seg4" role="group" aria-labelledby="lbl-mobile" data-seg="mobile"></div></div>
+<div class="cfield"><span class="cfield-l" id="lbl-web">Web</span><div class="seg seg3" role="group" aria-labelledby="lbl-web" data-seg="web"></div></div>
+<div class="cfield"><span class="cfield-l" id="lbl-core">Серверная часть и управление</span><div class="toggles" role="group" aria-labelledby="lbl-core" data-toggles></div></div>
+</div>
+
+<div class="cstep rv">
+<div class="cstep-h"><span class="cstep-n">02</span><h3 id="lbl-scale">Масштаб</h3><span class="cstep-hint">объём и сложность</span></div>
+<div class="seg seg3" role="group" aria-labelledby="lbl-scale" data-seg="scale"></div>
+<div class="cfield">
+<div class="rng-h"><label class="cfield-l" for="calc-screens">Количество экранов</label><span class="rng-v"><span id="screens-v">20</span><small>20 входят в базу, далее +8 тыс за экран</small></span></div>
+<input id="calc-screens" class="range" type="range" min="5" max="80" step="1" value="20">
+<div class="rng-scale"><span>5</span><span>80</span></div>
+</div>
+</div>
+
+<div class="cstep rv">
+<div class="cstep-h"><span class="cstep-n">03</span><h3 id="lbl-feats">Функциональность</h3><span class="cstep-hint">можно несколько</span></div>
+<div class="feats" role="group" aria-labelledby="lbl-feats" data-checks="feats"></div>
+</div>
+
+<div class="cstep rv">
+<div class="cstep-h"><span class="cstep-n">04</span><h3 id="lbl-design">Дизайн</h3><span class="cstep-hint">по запросу</span></div>
+<div class="seg seg3" role="group" aria-labelledby="lbl-design" data-seg="design"></div>
+</div>
+
+<div class="cstep rv">
+<div class="cstep-h"><span class="cstep-n">05</span><h3 id="lbl-ops">DevOps и запуск</h3><span class="cstep-hint">инфраструктура</span></div>
+<div class="feats" role="group" aria-labelledby="lbl-ops" data-checks="ops"></div>
+</div>
+
+<div class="cstep rv">
+<div class="cstep-h"><span class="cstep-n">06</span><h3>Сроки и поддержка</h3></div>
+<div class="cfield"><span class="cfield-l" id="lbl-pace">Темп разработки</span><div class="seg seg2" role="group" aria-labelledby="lbl-pace" data-seg="pace"></div></div>
+<div class="cfield"><span class="cfield-l" id="lbl-support">Поддержка после запуска</span><div class="seg seg3" role="group" aria-labelledby="lbl-support" data-seg="support"></div></div>
+</div>
+
+</div>
+
+<aside class="csum" aria-label="Итог расчёта">
+<div class="csum-top"><span class="csum-k">Ориентировочная стоимость</span><span class="csum-badge" id="c-scale">MVP</span></div>
+<div class="csum-total" aria-live="polite"><small id="c-pre">от</small><span id="c-total">—</span></div>
+<div class="csum-range" id="c-range"></div>
+<div class="csum-meta"><div class="cm"><span>Срок</span><b id="c-dur">—</b></div><div class="cm"><span>Поддержка</span><b id="c-sup">—</b></div></div>
+<div class="cbar" aria-hidden="true"><i class="cb-dev" id="b-dev"></i><i class="cb-des" id="b-des"></i><i class="cb-ops" id="b-ops"></i></div>
+<div class="clegend"><span><i class="cb-dev"></i>Разработка</span><span><i class="cb-des"></i>Дизайн</span><span><i class="cb-ops"></i>DevOps</span></div>
+<div class="clines" id="c-lines"></div>
+<p class="cwarn" id="c-warn" hidden>Backend добавлен автоматически: выбранные функции требуют серверную часть.</p>
+<a class="btn btn-primary btn-block" id="c-send" href="mailto:digest2003@gmail.com">Отправить заявку с расчётом<svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<a class="btn btn-ghost btn-block" href="https://t.me/erogov86" target="_blank" rel="noopener">Обсудить в Telegram</a>
+<p class="cnote">Расчёт ориентировочный и не является публичной офертой. Кнопка откроет почту с выбранной конфигурацией.</p>
+</aside>
+</div>
+</div>
+</section>
+
+<section class="section" id="contact">
+<div class="wrap contact-grid">
+<div class="contact-copy">
+<div class="kicker rv">10 / Контакты</div>
+<h2 class="h2 big rv">Расскажите о задаче</h2>
+<p class="lead rv">Даже без дизайна и технического задания. На первом созвоне определим:</p>
+<ol class="helps rv">
+<li>что войдёт в первую версию</li>
+<li>какие архитектура и инфраструктура нужны</li>
+<li>что можно не делать на старте</li>
+<li>сроки и бюджет</li>
+</ol>
+<div class="direct rv">
+<a class="btn btn-ghost" href="https://t.me/erogov86" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>Telegram</a>
+<a class="btn btn-ghost" href="mailto:digest2003@gmail.com"><svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>Email</a>
+</div>
+</div>
+<div class="form rv">
+<div class="form-h mono"><span>Заявка</span><span class="accent">оценка бесплатно</span></div>
+<div class="field"><label for="f-name">Имя</label><input id="f-name" class="input" type="text" placeholder="Как к вам обращаться"></div>
+<div class="field"><label for="f-contact">Telegram / Email</label><input id="f-contact" class="input" type="text" placeholder="@username или mail@company.ru"></div>
+<div class="field"><label for="f-idea">Что хотите разработать?</label><textarea id="f-idea" class="input area" rows="4" placeholder="Коротко об идее, платформах и сроках"></textarea></div>
+<a class="btn btn-primary btn-block" id="contact-send" href="mailto:digest2003@gmail.com">Отправить заявку<svg class="ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<p class="form-note">Откроется почта с готовым письмом.</p>
+</div>
+</div>
+</section>
+
+<section class="outro">
+<div class="wrap">
+<p class="outro-k mono">Есть идея приложения?</p>
+<a class="outro-big" href="#contact"><span class="l1">Сделаю</span><span class="l2">всё остальное<svg class="ic" viewBox="0 0 24 24" width="80" height="80" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></a>
+</div>
+<footer class="footer">
+<div class="wrap foot">
+<a class="logo" href="#top"><span class="logo-name">cod<span class="logo-er">ER</span></span><span class="logo-sub">/ senior lead fullstack</span></a>
+<div class="foot-links"><a href="https://t.me/erogov86" target="_blank" rel="noopener">Telegram</a><a href="mailto:digest2003@gmail.com">Email</a><a href="https://github.com/EugeneRogov" target="_blank" rel="noopener">GitHub</a></div>
+<span class="foot-c mono">© 2026</span>
+</div>
+</footer>
+</section>
+
+</div>
+<script>
+(function () {
+  'use strict';
+  var MAIL = 'digest2003@gmail.com';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------- Счётчики в блоке цифр ---------- */
+  var stats = $('stats');
+  if (stats && !reduce && 'IntersectionObserver' in window) {
+    var nums = stats.querySelectorAll('[data-to]');
+    nums.forEach(function (n) { n.textContent = n.getAttribute('data-from') || '0'; });
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries.some(function (e) { return e.isIntersecting; })) return;
+      io.disconnect();
+      var t0 = performance.now();
+      (function tick(now) {
+        var q = Math.min(1, (now - t0) / 1800), e = 1 - Math.pow(1 - q, 3);
+        nums.forEach(function (n) {
+          var a = +(n.getAttribute('data-from') || 0), b = +n.getAttribute('data-to');
+          n.textContent = Math.round(a + (b - a) * e);
+        });
+        if (q < 1) requestAnimationFrame(tick);
+      })(t0);
+    }, { threshold: 0.3 });
+    io.observe(stats);
+  }
+
+  /* ---------- Калькулятор: все цены и коэффициенты здесь ---------- */
+  var C = {
+    mobile: { none: 0, android: 500000, ios: 500000, both: 700000 },
+    mobileName: { none: 'нет', android: 'Android', ios: 'iOS', both: 'Android + iOS (Kotlin Multiplatform)' },
+    web: { none: 0, site: 150000, app: 300000 },
+    webName: { none: 'нет', site: 'сайт / лендинг', app: 'web-приложение / личный кабинет' },
+    backend: 200000,
+    admin: 200000,
+    adminSolo: 300000,
+    scale: { mvp: 1, product: 1.4, system: 1.9 },
+    scaleName: { mvp: 'MVP', product: 'Продукт', system: 'Сложная система' },
+    screensIncluded: 20,
+    perScreen: 8000,
+    design: { own: 0, kit: 150000, full: 300000 },
+    designName: { own: 'есть свой / не нужен', kit: 'UI по готовой системе', full: 'полный UX/UI + дизайн-система' },
+    feats: [
+      { id: 'auth', label: 'Авторизация и профили', price: 60000, server: true },
+      { id: 'roles', label: 'Роли и права доступа', price: 80000, server: true },
+      { id: 'payments', label: 'Платежи и подписки', price: 120000, server: true },
+      { id: 'push', label: 'Push-уведомления', price: 40000, server: true },
+      { id: 'chat', label: 'Чат и сообщения', price: 150000, server: true },
+      { id: 'geo', label: 'Карты и геолокация', price: 100000, server: false },
+      { id: 'catalog', label: 'Каталог, поиск и фильтры', price: 80000, server: false },
+      { id: 'offline', label: 'Офлайн-режим и синхронизация', price: 120000, server: false },
+      { id: 'integrations', label: 'Интеграции с внешними API', price: 100000, server: true },
+      { id: 'ai', label: 'AI-функции на LLM', price: 200000, server: true },
+      { id: 'analytics', label: 'Аналитика и дашборды', price: 80000, server: true },
+      { id: 'i18n', label: 'Мультиязычность', price: 40000, server: false }
+    ],
+    ops: [
+      { id: 'cicd', label: 'CI/CD и автосборки', price: 60000 },
+      { id: 'cloud', label: 'Docker и cloud-инфраструктура', price: 80000 },
+      { id: 'monitoring', label: 'Мониторинг, логи и алерты', price: 50000 },
+      { id: 'stores', label: 'Публикация в сторах', price: 30000 }
+    ],
+    rush: 0.25,
+    spread: 1.3,
+    velocity: 280000,
+    support: { none: 0, base: 100000, plus: 180000 },
+    supportName: { none: 'не нужна', base: 'базовая', plus: 'развитие' }
+  };
+
+  var S = {
+    mobile: 'both', web: 'none', backend: true, admin: true, scale: 'mvp', screens: 20,
+    feats: { auth: true, push: true }, design: 'own', ops: { cicd: true, stores: true },
+    pace: 'std', support: 'base'
+  };
+
+  function k(n) { return Math.round(n / 1000) + ' тыс'; }
+  function fmt(n) { return typeof n === 'number' ? (Math.round(n / 1000) * 1000).toLocaleString('ru-RU') + ' ₽' : n; }
+
+  function model() {
+    var lines = [];
+    var hasMobile = S.mobile !== 'none', hasWeb = S.web !== 'none';
+    var empty = !hasMobile && !hasWeb && !S.admin;
+    var featSel = C.feats.filter(function (f) { return S.feats[f.id]; });
+    var needsServer = featSel.some(function (f) { return f.server; }) || S.admin || S.web === 'app';
+    var backendOn = !empty && (S.backend || needsServer);
+    var autoBackend = backendOn && !S.backend;
+
+    var baseDev = 0;
+    if (hasMobile) { baseDev += C.mobile[S.mobile]; lines.push(['Мобильное приложение: ' + C.mobileName[S.mobile], C.mobile[S.mobile]]); }
+    if (hasWeb) { baseDev += C.web[S.web]; lines.push(['Web: ' + C.webName[S.web], C.web[S.web]]); }
+    if (backendOn) {
+      if (hasMobile) { baseDev += C.backend; lines.push(['Backend и API', C.backend]); }
+      else lines.push(['Backend и API', 'включён']);
+    }
+    if (S.admin) {
+      var a = !hasMobile && !hasWeb ? C.adminSolo : C.admin;
+      baseDev += a;
+      lines.push(['Админ-панель', a]);
+    }
+    featSel.forEach(function (f) { baseDev += f.price; lines.push([f.label, f.price]); });
+
+    var baseDesign = C.design[S.design];
+    if (baseDesign) lines.push(['Дизайн: ' + C.designName[S.design], baseDesign]);
+
+    var mult = C.scale[S.scale];
+    var scaleAdd = (baseDev + baseDesign) * (mult - 1);
+    if (scaleAdd > 0) lines.push(['Масштаб «' + C.scaleName[S.scale] + '» ×' + String(mult).replace('.', ','), scaleAdd, 'mod']);
+    var extra = Math.max(0, S.screens - C.screensIncluded);
+    var screensAdd = extra * C.perScreen;
+    if (screensAdd > 0) lines.push(['Дополнительные экраны: ' + extra, screensAdd, 'mod']);
+
+    var devG = baseDev * mult + screensAdd;
+    var desG = baseDesign * mult;
+    var opsSel = C.ops.filter(function (o) { return S.ops[o.id] && (o.id !== 'stores' || hasMobile); });
+    var opsG = 0;
+    opsSel.forEach(function (o) { opsG += o.price; lines.push([o.label, o.price]); });
+
+    var rush = S.pace === 'rush';
+    if (rush) {
+      lines.push(['Ускоренные сроки +25%', (devG + desG) * C.rush, 'mod']);
+      devG *= 1 + C.rush;
+      desG *= 1 + C.rush;
+    }
+
+    if (empty) { devG = 0; desG = 0; opsG = 0; lines = []; }
+    var raw = devG + desG + opsG;
+    var low = Math.round(raw / 10000) * 10000;
+    var high = Math.round((raw * C.spread) / 10000) * 10000;
+
+    var dur = '—';
+    if (!empty) {
+      var m = raw / C.velocity;
+      if (rush) m *= 0.8;
+      if (m < 0.9) {
+        var w = Math.max(2, Math.round(m * 4.3));
+        dur = w + '–' + (w + 2) + ' нед.';
+      } else {
+        var lo = Math.max(1, Math.round(m));
+        var hi = Math.max(lo + 1, Math.round(m * 1.3));
+        dur = lo + '–' + hi + ' мес.';
+      }
+    }
+    return {
+      lines: lines, low: low, high: high, devG: devG, desG: desG, opsG: opsG, dur: dur, empty: empty,
+      autoBackend: autoBackend, backendOn: backendOn, hasMobile: hasMobile, featSel: featSel, opsSel: opsSel
+    };
+  }
+
+  /* ---------- Построение контролов ---------- */
+  var SEG = {
+    mobile: [['none', 'Нет', 'не нужно'], ['android', 'Android', 'от ' + k(C.mobile.android)], ['ios', 'iOS', 'от ' + k(C.mobile.ios)], ['both', 'Android + iOS', 'KMP · от ' + k(C.mobile.both)]],
+    web: [['none', 'Нет', 'не нужно'], ['site', 'Сайт / лендинг', 'от ' + k(C.web.site)], ['app', 'Web-приложение', 'кабинет, CRM · от ' + k(C.web.app)]],
+    scale: [['mvp', 'MVP', '×1 · первая версия, проверка гипотезы'], ['product', 'Продукт', '×1,4 · больше ролей и сценариев'], ['system', 'Сложная система', '×1,9 · нагрузка, интеграции, AI']],
+    design: [['own', 'Есть свой', 'или дизайн не нужен · 0 ₽'], ['kit', 'UI по готовой системе', '+' + k(C.design.kit)], ['full', 'Полный UX/UI', 'с дизайн-системой · +' + k(C.design.full)]],
+    pace: [['std', 'Стандартный', 'оптимальный темп'], ['rush', 'Ускоренный', '+25% к стоимости, срок короче']],
+    support: [['none', 'Не нужна', '—'], ['base', 'Базовая', k(C.support.base) + '/мес · мониторинг, исправления'], ['plus', 'Развитие', k(C.support.plus) + '/мес · + новые функции']]
+  };
+
+  function mkBtn(cls, parts) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = cls;
+    parts.forEach(function (p) {
+      var s = document.createElement('span');
+      s.className = p[0];
+      if (p[1]) s.textContent = p[1];
+      b.appendChild(s);
+    });
+    return b;
+  }
+
+  var segBtns = [];
+  document.querySelectorAll('[data-seg]').forEach(function (box) {
+    var key = box.getAttribute('data-seg');
+    SEG[key].forEach(function (o) {
+      var b = mkBtn('sopt', [['so-t', o[1]], ['so-s', o[2]]]);
+      b.addEventListener('click', function () { S[key] = o[0]; update(); });
+      box.appendChild(b);
+      segBtns.push({ b: b, key: key, val: o[0] });
+    });
+  });
+
+  var tBox = document.querySelector('[data-toggles]');
+  function mkToggle(label, onClick) {
+    var b = mkBtn('tgl', [['swu'], ['tg-b']]);
+    b.firstChild.appendChild(document.createElement('i'));
+    var t = document.createElement('span'); t.className = 'tg-t'; t.textContent = label;
+    var s = document.createElement('span'); s.className = 'tg-s';
+    b.lastChild.appendChild(t);
+    b.lastChild.appendChild(s);
+    b.addEventListener('click', onClick);
+    tBox.appendChild(b);
+    return { b: b, sub: s };
+  }
+  var tBackend = mkToggle('Backend и API', function () { S.backend = !S.backend; update(); });
+  var tAdmin = mkToggle('Админ-панель', function () { S.admin = !S.admin; update(); });
+
+  var checks = [];
+  function mkChecks(bag, list) {
+    var box = document.querySelector('[data-checks="' + bag + '"]');
+    list.forEach(function (f) {
+      var b = mkBtn('feat', [['fbox'], ['ft', f.label], ['fs', '+' + k(f.price)]]);
+      b.addEventListener('click', function () { S[bag][f.id] = !S[bag][f.id]; update(); });
+      box.appendChild(b);
+      checks.push({ b: b, bag: bag, f: f, sub: b.lastChild });
+    });
+  }
+  mkChecks('feats', C.feats);
+  mkChecks('ops', C.ops);
+
+  var range = $('calc-screens');
+  range.addEventListener('input', function () { S.screens = parseInt(range.value, 10) || 20; update(); });
+
+  /* ---------- Итог ---------- */
+  var shown = null, tw = null;
+  function setTotal(v) { $('c-total').textContent = (Math.round(v / 1000) * 1000).toLocaleString('ru-RU') + ' ₽'; }
+  function tween(to) {
+    if (tw) cancelAnimationFrame(tw);
+    if (reduce || shown === null || shown === to) { shown = to; setTotal(to); return; }
+    var from = shown, t0 = performance.now();
+    (function step(now) {
+      var q = Math.min(1, (now - t0) / 520), e = 1 - Math.pow(1 - q, 3);
+      shown = from + (to - from) * e;
+      setTotal(shown);
+      if (q < 1) tw = requestAnimationFrame(step); else shown = to;
+    })(t0);
+  }
+
+  function mailBody(M) {
+    var list = function (arr) { return arr.length ? arr.map(function (x) { return x.label; }).join(', ') : 'нет'; };
+    var sup = C.support[S.support];
+    return [
+      'Здравствуйте! Хочу обсудить проект.',
+      '',
+      'Конфигурация из калькулятора:',
+      '— Мобильное приложение: ' + C.mobileName[S.mobile],
+      '— Web: ' + C.webName[S.web],
+      '— Backend и API: ' + (M.backendOn ? 'да' : 'нет'),
+      '— Админ-панель: ' + (S.admin ? 'да' : 'нет'),
+      '— Масштаб: ' + C.scaleName[S.scale] + ', экранов: ~' + S.screens,
+      '— Функции: ' + list(M.featSel),
+      '— Дизайн: ' + C.designName[S.design],
+      '— DevOps и запуск: ' + list(M.opsSel),
+      '— Темп: ' + (S.pace === 'rush' ? 'ускоренный' : 'стандартный'),
+      '— Поддержка: ' + C.supportName[S.support] + (sup ? ', ' + fmt(sup) + '/мес' : ''),
+      '',
+      'Ориентировочно: ' + (M.empty ? '—' : fmt(M.low) + ' – ' + fmt(M.high) + ', срок ' + M.dur),
+      '',
+      'Имя:',
+      'Контакт:',
+      'Комментарий:'
+    ].join('\n');
+  }
+
+  function setOn(b, on) {
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+
+  function update() {
+    var M = model();
+
+    segBtns.forEach(function (x) { setOn(x.b, S[x.key] === x.val); });
+
+    setOn(tBackend.b, S.backend || M.autoBackend);
+    tBackend.b.classList.toggle('forced', M.autoBackend);
+    tBackend.sub.textContent = M.autoBackend ? 'нужен для выбранных функций' : (M.hasMobile ? '+' + k(C.backend) : 'включён в web-проект');
+    setOn(tAdmin.b, S.admin);
+    tAdmin.sub.textContent = '+' + k(!M.hasMobile && S.web === 'none' ? C.adminSolo : C.admin);
+
+    checks.forEach(function (x) {
+      var dis = x.bag === 'ops' && x.f.id === 'stores' && !M.hasMobile;
+      x.b.disabled = dis;
+      x.b.classList.toggle('dis', dis);
+      setOn(x.b, !!S[x.bag][x.f.id] && !dis);
+      x.sub.textContent = dis ? 'нужно мобильное приложение' : '+' + k(x.f.price);
+    });
+
+    range.value = S.screens;
+    $('screens-v').textContent = S.screens;
+    var pct = (((S.screens - 5) / 75) * 100).toFixed(1);
+    range.style.background = 'linear-gradient(90deg,var(--accent) ' + pct + '%,var(--surface2) ' + pct + '%)';
+
+    $('c-scale').textContent = C.scaleName[S.scale];
+    $('c-pre').textContent = M.empty ? '' : 'от';
+    if (M.empty) {
+      if (tw) cancelAnimationFrame(tw);
+      shown = null;
+      $('c-total').textContent = '—';
+    } else {
+      tween(M.low);
+    }
+    $('c-range').textContent = M.empty ? 'Выберите хотя бы одну платформу' : 'до ' + fmt(M.high) + ' — зависит от деталей';
+    $('c-dur').textContent = M.dur;
+    var sup = C.support[S.support];
+    $('c-sup').textContent = sup ? k(sup) + '/мес' : 'не нужна';
+
+    var sum = M.devG + M.desG + M.opsG;
+    var w = function (v) { return (sum > 0 ? (v / sum) * 100 : 0).toFixed(1) + '%'; };
+    $('b-dev').style.width = w(M.devG);
+    $('b-des').style.width = w(M.desG);
+    $('b-ops').style.width = w(M.opsG);
+
+    var box = $('c-lines');
+    box.textContent = '';
+    M.lines.forEach(function (l) {
+      var row = document.createElement('div');
+      row.className = 'cline' + (l[2] === 'mod' ? ' mod' : '');
+      var a = document.createElement('span'); a.textContent = l[0];
+      var b = document.createElement('b'); b.textContent = (l[2] === 'mod' ? '+' : '') + fmt(l[1]);
+      row.appendChild(a);
+      row.appendChild(b);
+      box.appendChild(row);
+    });
+
+    $('c-warn').hidden = !M.autoBackend;
+    $('c-send').href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('Заявка: расчёт проекта') + '&body=' + encodeURIComponent(mailBody(M));
+  }
+
+  /* ---------- Форма заявки ---------- */
+  var send = $('contact-send');
+  function contactHref() {
+    var v = function (id) { return ($(id).value || '').trim(); };
+    var text = ['Имя: ' + (v('f-name') || '—'), 'Контакт: ' + (v('f-contact') || '—'), '', 'Что хотим разработать:', v('f-idea')].join('\n');
+    send.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('Заявка на оценку проекта') + '&body=' + encodeURIComponent(text);
+  }
+  ['f-name', 'f-contact', 'f-idea'].forEach(function (id) { $(id).addEventListener('input', contactHref); });
+  contactHref();
+
+  update();
+})();
+
+</script>
+</body>
+</html>
